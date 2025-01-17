@@ -230,8 +230,6 @@
             <div class="slide"><img src="https://i.ibb.co/djZGrZr/Snapseed-nef-3.jpg" alt="Gallery Image 2"></div>
             <div class="slide"><img src="https://i.ibb.co/tsTFQ27/St-vel-01.jpg" alt="Gallery Image 2"></div>
             <div class="slide"><img src="" alt="Gallery Image 2"></div>
-            <div class="slide"><img src="" alt="Gallery Image 2"></div>
-            <div class="slide"><img src="" alt="Gallery Image 2"></div>
         </div>
         <div class="dots"></div>
     </div>
@@ -248,48 +246,52 @@
         <span class="instagram-logo">@Instagram</span>
     </div>
     <div class="overlay"></div>
-
     <script>
-        const slides = document.querySelectorAll('.slide');
-        const dotsContainer = document.querySelector('.dots');
-        const popup = document.querySelector('.popup');
-        const overlay = document.querySelector('.overlay');
+    const slides = document.querySelectorAll('.slide');
+    const dotsContainer = document.querySelector('.dots');
+    const popup = document.querySelector('.popup');
+    const overlay = document.querySelector('.overlay');
 
-        let currentIndex = 0;
-        let popupTimeout, popupInterval;
+    let currentIndex = 0;
+    let popupTimeout, popupInterval;
 
-        const updateActiveState = () => {
-            slides.forEach((slide, i) => {
-                slide.classList.toggle('active', i === currentIndex);
-            });
-        };
-
-        const showSlide = (index) => {
-            currentIndex = (index + slides.length) % slides.length;
-            updateActiveState();
-        };
-
-        const nextSlide = () => showSlide(currentIndex + 1);
-        setInterval(nextSlide, 5000);
-
-        const showPopup = () => {
-            popup.style.display = 'block';
-            overlay.style.display = 'block';
-            popupTimeout = setTimeout(() => {
-                popup.style.display = 'none';
-                overlay.style.display = 'none';
-            }, 20000);
-        };
-
-        popupInterval = setInterval(showPopup, 120000);
-
-        slides.forEach((_, index) => {
-            const dot = document.createElement('span');
-            dot.addEventListener('click', () => showSlide(index));
-            dotsContainer.appendChild(dot);
+    const updateActiveState = () => {
+        slides.forEach((slide, i) => {
+            slide.classList.toggle('active', i === currentIndex);
         });
+    };
 
+    const showSlide = (index) => {
+        currentIndex = (index + slides.length) % slides.length;
         updateActiveState();
-    </script>
+    };
+
+    const nextSlide = () => showSlide(currentIndex + 1);
+    setInterval(nextSlide, 5000); // Slide changes every 5 seconds
+
+    const showPopup = () => {
+        popup.style.display = 'block';
+        overlay.style.display = 'block';
+        // Hide the popup after 20 seconds
+        clearTimeout(popupTimeout); // Clear any previous timeouts
+        popupTimeout = setTimeout(() => {
+            popup.style.display = 'none';
+            overlay.style.display = 'none';
+        }, 20000); // Popup stays for 20 seconds
+    };
+
+    // Show the popup every 120 seconds (2 minutes)
+    clearInterval(popupInterval); // Clear any previous intervals
+    popupInterval = setInterval(showPopup, 120000); // Popup shows every 120 seconds
+
+    slides.forEach((_, index) => {
+        const dot = document.createElement('span');
+        dot.addEventListener('click', () => showSlide(index));
+        dotsContainer.appendChild(dot);
+    });
+
+    updateActiveState();
+</script>
+
 </body>
 </html>
