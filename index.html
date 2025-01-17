@@ -96,6 +96,51 @@
             transform: scale(1.2);
         }
 
+        .popup {
+            position: fixed;
+            top: 50%;
+            left: 50%;
+            transform: translate(-50%, -50%);
+            background: #fff;
+            padding: 20px;
+            border-radius: 10px;
+            box-shadow: 0 4px 15px rgba(0, 0, 0, 0.3);
+            display: none;
+            z-index: 1000;
+            text-align: center;
+        }
+
+        .popup img {
+            width: 200px;
+            height: 200px;
+        }
+
+        .popup button {
+            margin-top: 10px;
+            padding: 8px 16px;
+            background: #333;
+            color: #fff;
+            border: none;
+            border-radius: 5px;
+            cursor: pointer;
+            transition: background 0.3s ease;
+        }
+
+        .popup button:hover {
+            background: #555;
+        }
+
+        .overlay {
+            position: fixed;
+            top: 0;
+            left: 0;
+            width: 100%;
+            height: 100%;
+            background: rgba(0, 0, 0, 0.5);
+            z-index: 999;
+            display: none;
+        }
+
         footer {
             text-align: center;
             font-size: 1rem;
@@ -126,6 +171,11 @@
                 height: 12px;
                 width: 12px;
             }
+
+            .popup img {
+                width: 150px;
+                height: 150px;
+            }
         }
     </style>
 </head>
@@ -135,11 +185,16 @@
             <div class="slide active"><img src="https://i.ibb.co/fSKdDt0/F-r-06.jpg" alt="Gallery Image 1"></div>
             <div class="slide"><img src="https://i.ibb.co/q7561nw/F-r-03.jpg" alt="Gallery Image 2"></div>
             <div class="slide"><img src="https://i.ibb.co/7g4WKxh/F-r-05.jpg" alt="Gallery Image 3"></div>
-            <div class="slide"><img src="https://i.ibb.co/w4M9RrC/F-r-07.jpg" alt="Gallery Image 4"></div>
-            <div class="slide"><img src="https://i.ibb.co/9GxVrmy/F-r-02.jpg" alt="Gallery Image 5"></div>
         </div>
 
         <div class="dots"></div>
+    </div>
+
+    <div class="overlay"></div>
+    <div class="popup">
+        <p>Follow us on Instagram!</p>
+        <img src="https://i.ibb.co/7kFgGLn/instagram-qr.png" alt="Instagram QR Code">
+        <button onclick="closePopup()">Close</button>
     </div>
 
     <footer>
@@ -154,7 +209,6 @@
         const dotsContainer = document.querySelector('.dots');
         let currentIndex = 0;
 
-        // Create dots dynamically
         slides.forEach((_, index) => {
             const dot = document.createElement('span');
             dot.addEventListener('click', () => showSlide(index));
@@ -179,6 +233,25 @@
         setInterval(nextSlide, 5000); // Auto slide every 5 seconds
 
         updateActiveState();
+
+        // Popup logic
+        const popup = document.querySelector('.popup');
+        const overlay = document.querySelector('.overlay');
+
+        const showPopup = () => {
+            popup.style.display = 'block';
+            overlay.style.display = 'block';
+        };
+
+        const closePopup = () => {
+            popup.style.display = 'none';
+            overlay.style.display = 'none';
+        };
+
+        setTimeout(() => {
+            showPopup();
+            setInterval(showPopup, 120000); // Show popup every 2 minutes
+        }, 20000); // Initial delay of 20 seconds
     </script>
 </body>
 </html>
