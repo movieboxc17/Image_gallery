@@ -60,35 +60,6 @@
             display: block;
         }
 
-        .controls {
-            position: absolute;
-            top: 50%;
-            width: 100%;
-            display: flex;
-            justify-content: space-between;
-            transform: translateY(-50%);
-            pointer-events: none;
-        }
-
-        .controls button {
-            pointer-events: all;
-            background: rgba(0, 0, 0, 0.6);
-            border: none;
-            color: #fff;
-            padding: 18px;
-            font-size: 2rem;
-            cursor: pointer;
-            border-radius: 50%;
-            transition: background-color 0.3s ease, transform 0.3s ease;
-            box-shadow: 0 6px 12px rgba(0, 0, 0, 0.6);
-        }
-
-        .controls button:hover {
-            background: rgba(255, 255, 255, 0.9);
-            color: #333;
-            transform: scale(1.1);
-        }
-
         .dots {
             position: absolute;
             bottom: 20px;
@@ -138,11 +109,6 @@
         }
 
         @media (max-width: 768px) {
-            .controls button {
-                padding: 12px;
-                font-size: 1.5rem;
-            }
-
             .dots span {
                 height: 12px;
                 width: 12px;
@@ -166,11 +132,6 @@
         <div class="slide"><img src="https://i.ibb.co/Vvmy7HD/Snapseed-nef-2.jpg" alt="Gallery Image 12"></div>
         <div class="slide"><img src="https://i.ibb.co/djZGrZr/Snapseed-nef-3.jpg" alt="Gallery Image 13"></div>
         <div class="slide"><img src="https://i.ibb.co/tsTFQ27/St-vel-01.jpg" alt="Gallery Image 14"></div>
-    </div>
-
-    <div class="controls">
-        <button id="prev"><i class="fas fa-chevron-left"></i></button>
-        <button id="next"><i class="fas fa-chevron-right"></i></button>
     </div>
 
     <div class="dots"></div>
@@ -208,10 +169,6 @@
         };
 
         const nextSlide = () => showSlide(currentIndex + 1);
-        const prevSlide = () => showSlide(currentIndex - 1);
-
-        document.getElementById('next').addEventListener('click', nextSlide);
-        document.getElementById('prev').addEventListener('click', prevSlide);
 
         setInterval(nextSlide, 5000); // Auto slide every 5 seconds
 
