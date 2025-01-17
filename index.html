@@ -115,21 +115,6 @@
             height: 200px;
         }
 
-        .popup button {
-            margin-top: 10px;
-            padding: 8px 16px;
-            background: #333;
-            color: #fff;
-            border: none;
-            border-radius: 5px;
-            cursor: pointer;
-            transition: background 0.3s ease;
-        }
-
-        .popup button:hover {
-            background: #555;
-        }
-
         .overlay {
             position: fixed;
             top: 0;
@@ -194,7 +179,6 @@
     <div class="popup">
         <p>Follow us on Instagram!</p>
         <img src="https://i.ibb.co/7kFgGLn/instagram-qr.png" alt="Instagram QR Code">
-        <button onclick="closePopup()">Close</button>
     </div>
 
     <footer>
@@ -241,17 +225,16 @@
         const showPopup = () => {
             popup.style.display = 'block';
             overlay.style.display = 'block';
+            setTimeout(hidePopup, 20000); // Hide popup after 20 seconds
         };
 
-        const closePopup = () => {
+        const hidePopup = () => {
             popup.style.display = 'none';
             overlay.style.display = 'none';
         };
 
-        setTimeout(() => {
-            showPopup();
-            setInterval(showPopup, 120000); // Show popup every 2 minutes
-        }, 20000); // Initial delay of 20 seconds
+        setInterval(showPopup, 120000); // Show popup every 2 minutes
+        setTimeout(showPopup, 20000); // Initial delay of 20 seconds
     </script>
 </body>
 </html>
