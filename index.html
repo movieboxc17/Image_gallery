@@ -35,7 +35,7 @@
 
         .slideshow-container {
             position: relative;
-            max-width: 1000px;
+            max-width: 1700px;
             width: 100%;
             margin: 20px 20px;
             border-radius: 20px;
@@ -140,7 +140,7 @@
             font-family: 'Grand Hotel', cursive;
             background: #fff;
             color: #e52e71;
-            padding: 8px 20px;
+            padding: 8px 10px;
             border-radius: 10px;
             box-shadow: 0 3px 10px rgba(0, 0, 0, 0.2);
             text-transform: capitalize;
@@ -215,7 +215,6 @@
     <div class="content-wrapper">
         <div class="slideshow-container">
             <div class="slide active"><img src="https://i.ibb.co/fSKdDt0/F-r-06.jpg" alt="Gallery Image 1"></div>
-            <div class="slide"><img src="https://i.ibb.co/4gFYtKJ/IMG-0373.jpg" alt="Gallery Image 2"></div>
             <div class="slide"><img src="https://i.ibb.co/fSKdDt0/F-r-06.jpg" alt="Gallery Image 2"></div>
             <div class="slide"><img src="https://i.ibb.co/q7561nw/F-r-03.jpg" alt="Gallery Image 2"></div>
             <div class="slide"><img src="https://i.ibb.co/q7561nw/F-r-03.jpg" alt="Gallery Image 2"></div>
@@ -229,16 +228,19 @@
             <div class="slide"><img src="https://i.ibb.co/2ywnfZ7/H-st-Krig-5.jpg" alt="Gallery Image 2"></div>
             <div class="slide"><img src="https://i.ibb.co/Vvmy7HD/Snapseed-nef-2.jpg" alt="Gallery Image 2"></div>
             <div class="slide"><img src="https://i.ibb.co/djZGrZr/Snapseed-nef-3.jpg" alt="Gallery Image 2"></div>
-            <div class="slide"><img src="https://i.ibb.co/tsTFQ27/St-vel-01.jpg" alt="Gallery Image 2"></div>    
+            <div class="slide"><img src="https://i.ibb.co/tsTFQ27/St-vel-01.jpg" alt="Gallery Image 2"></div>
+           <div class="slide"><img src="https://i.ibb.co/4gFYtKJ/IMG-0373.jpg" alt="Gallery Image 2"></div>
+          <div class="slide"><img src="https://i.ibb.co/XVwBtBN/IMG-0705-1.jpg" alt="Gallery Image 2"></div>
+          
         </div>
-        <div class="dots"></div>
+        <div class=""></div>
     </div>
 
     <footer>
         <p>&copy; 2025 ThePhotographers. All Rights Reserved.</p>
         <p>Site created by <a href="https://www.instagram.com/the.photographers3" target="_blank">Askansz & Moviebox C17</a>.</p>
         <p>Photos taken by Askansz & Moviebox C17</p>
-        <p>Site coded by Elliot Winblad<p>
+        <p>Site coded by Moviebox c17<p>
     </footer>
 
     <div class="popup">
@@ -269,7 +271,7 @@
     };
 
     const nextSlide = () => showSlide(currentIndex + 1);
-    setInterval(nextSlide, 5000); // Slide changes every 5 seconds
+    setInterval(nextSlide, 6000); // Slide changes every 5 seconds
 
     const showPopup = () => {
         popup.style.display = 'block';
@@ -279,12 +281,12 @@
         popupTimeout = setTimeout(() => {
             popup.style.display = 'none';
             overlay.style.display = 'none';
-        }, 20000); // Popup stays for 20 seconds
+        }, 25000); // Popup stays for 25 seconds
     };
 
     // Show the popup every 120 seconds (2 minutes)
     clearInterval(popupInterval); // Clear any previous intervals
-    popupInterval = setInterval(showPopup, 120000); // Popup shows every 120 seconds
+    popupInterval = setInterval(showPopup, 65000); // Popup shows every 65 seconds
 
     slides.forEach((_, index) => {
         const dot = document.createElement('span');
