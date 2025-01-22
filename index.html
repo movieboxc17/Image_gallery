@@ -193,7 +193,7 @@
 
         setInterval(nextSlide, 6000); // Slide changes every 6 seconds
 
-        // Show the popup every 65 seconds
+        // Show the popup every 90 seconds
         const popup = document.querySelector('.popup');
         const overlay = document.querySelector('.overlay');
 
@@ -206,8 +206,8 @@
                 overlay.style.display = 'none';
             }, 25000); // Popup stays for 25 seconds
         };
-
-        setInterval(showPopup, 65000);
+        // popup settings
+        setInterval(showPopup, 90000);
 
         // Auto-refresh the page every 10 minutes using JavaScript
         setTimeout(() => {
