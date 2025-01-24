@@ -19,9 +19,9 @@
 }
 
 body {
-    background: linear-gradient(135deg, #3a1c71, #d76d77, #ffaf7b);
+    background: linear-gradient(135deg, #1e3c72, #2a5298, #00aaff);
     background-size: 400% 400%;
-    animation: gradientAnimation 10s ease infinite;
+    animation: gradientAnimation 15s ease infinite;
     color: #f4f4f4;
     display: flex;
     flex-direction: column;
@@ -30,6 +30,7 @@ body {
     min-height: 100vh;
     padding: 20px;
     overflow: hidden;
+    position: relative;
     transition: background 0.3s ease-in-out;
 }
 
@@ -40,10 +41,23 @@ body {
 }
 
 body.light-mode {
-    background: linear-gradient(135deg, #3a1c71, #d76d77, #ffaf7b);
+    background: linear-gradient(135deg, #1e3c72, #2a5298, #00aaff);
     background-size: 400% 400%;
-    animation: gradientAnimation 10s ease infinite;
+    animation: gradientAnimation 15s ease infinite;
     color: #121212;
+}
+
+body::after {
+    content: '';
+    position: absolute;
+    top: 0;
+    left: 0;
+    width: 100%;
+    height: 100%;
+    background: url('https://www.transparenttextures.com/patterns/rough-squares.png');
+    opacity: 0.1;
+    pointer-events: none;
+    z-index: -1;
 }
 
 .slideshow-container {
@@ -115,7 +129,7 @@ body.light-mode {
     top: 50%;
     left: 50%;
     transform: translate(-50%, -50%);
-    background: linear-gradient(145deg, #ff8a00, #e52e71);
+    background: linear-gradient(145deg, #1e3c72, #2a5298);
     padding: 60px;
     border-radius: 25px;
     box-shadow: 0 30px 70px rgba(0, 0, 0, 0.8);
@@ -208,7 +222,7 @@ footer {
     animation: fade-up 1.2s ease-in-out;
     margin-top: auto;
     transition: padding 0.3s ease;
-    border-radius: 20px; /* Added rounded corners */
+    border-radius: 20px;
 }
 
 footer a {
@@ -224,7 +238,7 @@ footer a:hover {
 
 button {
     padding: 12px 25px;
-    background: linear-gradient(135deg, #ff8a00, #e52e71);
+    background: linear-gradient(135deg, #1e3c72, #2a5298);
     border: none;
     border-radius: 10px;
     color: white;
@@ -234,7 +248,7 @@ button {
 }
 
 button:hover {
-    background: linear-gradient(135deg, #e52e71, #ff8a00);
+    background: linear-gradient(135deg, #2a5298, #1e3c72);
     transform: scale(1.05);
     box-shadow: 0 0 10px rgba(255, 255, 255, 0.3);
 }
