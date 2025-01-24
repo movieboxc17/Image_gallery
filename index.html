@@ -43,6 +43,12 @@ body {
     align-items: center;
     justify-content: center;
     box-shadow: 0 15px 40px rgba(0, 0, 0, 0.8);
+    transform: scale(1);
+    transition: transform 0.5s ease;
+}
+
+.slideshow-container:hover {
+    transform: scale(1.03);
 }
 
 .slide {
@@ -91,16 +97,17 @@ body {
     left: 50%;
     transform: translate(-50%, -50%);
     background: linear-gradient(145deg, #ff8a00, #e52e71);
-    padding: 50px;
+    padding: 60px;
     border-radius: 25px;
     box-shadow: 0 30px 70px rgba(0, 0, 0, 0.8);
     display: none;
     z-index: 1000;
     text-align: center;
     width: 80%;
-    max-width: 450px;
+    max-width: 480px;
     color: #fff;
     animation: popup-appear 0.8s ease-in-out;
+    transition: transform 0.5s ease, opacity 0.5s ease;
 }
 
 @keyframes popup-appear {
@@ -143,6 +150,23 @@ body {
     }
 }
 
+.popup .content {
+    font-size: 1.2rem;
+    margin-top: 15px;
+    animation: fade-up 1s ease-in-out;
+}
+
+@keyframes fade-up {
+    from {
+        opacity: 0;
+        transform: translateY(20px);
+    }
+    to {
+        opacity: 1;
+        transform: translateY(0);
+    }
+}
+
 .overlay {
     position: fixed;
     top: 0;
@@ -164,17 +188,6 @@ footer {
     box-shadow: 0 -3px 15px rgba(0, 0, 0, 0.7);
     animation: fade-up 1.2s ease-in-out;
     margin-top: auto;
-}
-
-@keyframes fade-up {
-    from {
-        opacity: 0;
-        transform: translateY(20px);
-    }
-    to {
-        opacity: 1;
-        transform: translateY(0);
-    }
 }
 
 footer a {
@@ -211,7 +224,7 @@ button:active {
 
 @media (max-width: 768px) {
     .popup {
-        padding: 30px;
+        padding: 40px;
     }
 
     .popup h2 {
@@ -226,7 +239,7 @@ button:active {
 
 @media (max-width: 480px) {
     .slideshow-container {
-        max-width: 95vw; /* Adjust for smaller screens */
+        max-width: 95vw;
         height: 60vh;
     }
 
