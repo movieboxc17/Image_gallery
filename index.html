@@ -19,7 +19,9 @@
 }
 
 body {
-    background: radial-gradient(circle at top, #121212, #000);
+    background: linear-gradient(135deg, #1d1d1d, #4e4e4e, #0f0f0f);
+    background-size: 400% 400%;
+    animation: gradientAnimation 10s ease infinite;
     color: #f4f4f4;
     display: flex;
     flex-direction: column;
@@ -31,8 +33,16 @@ body {
     transition: background 0.3s ease-in-out;
 }
 
+@keyframes gradientAnimation {
+    0% { background-position: 0% 50%; }
+    50% { background-position: 100% 50%; }
+    100% { background-position: 0% 50%; }
+}
+
 body.light-mode {
-    background: radial-gradient(circle at top, #f1f1f1, #fff);
+    background: linear-gradient(135deg, #f1f1f1, #ffffff);
+    background-size: 400% 400%;
+    animation: gradientAnimation 10s ease infinite;
     color: #121212;
 }
 
