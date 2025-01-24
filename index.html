@@ -19,7 +19,7 @@
 }
 
 body {
-    background: linear-gradient(135deg, #121212, #1a1a1a, #000);
+    background: radial-gradient(circle at top, #121212, #000);
     color: #f4f4f4;
     display: flex;
     flex-direction: column;
@@ -27,156 +27,81 @@ body {
     justify-content: center;
     min-height: 100vh;
     padding: 20px;
-    overflow: hidden;
-    transition: background 0.3s ease-in-out;
-    position: relative;
 }
 
-/* Custom Cursor */
-body {
-    cursor: url('https://www.yourcustomcursorurl.com/cursor.png'), auto;
-}
-
-/* Particle Animation */
-@keyframes floating-particles {
-    0% {
-        transform: translateX(0) translateY(0);
-        opacity: 0;
-    }
-    50% {
-        transform: translateX(20px) translateY(20px);
-        opacity: 1;
-    }
-    100% {
-        transform: translateX(0) translateY(0);
-        opacity: 0;
-    }
-}
-
-.particle {
-    position: absolute;
-    background: #ff8a00;
-    border-radius: 50%;
-    width: 6px;
-    height: 6px;
-    animation: floating-particles 2s infinite ease-in-out;
-}
-
+/* Slideshow Container */
 .slideshow-container {
     position: relative;
-    max-width: 90vw;
-    height: 80vh;
+    max-width: 1200px;
+    width: 100%;
     margin: 20px auto;
-    border: none;
-    background: none;
-    border-radius: 20px;
     overflow: hidden;
-    display: flex;
-    align-items: center;
-    justify-content: center;
-    box-shadow: 0 15px 40px rgba(0, 0, 0, 0.8);
-    transform: scale(1);
-    transition: transform 0.5s ease, box-shadow 0.3s ease-in-out;
-    will-change: transform, box-shadow;
 }
 
-.slideshow-container:hover {
-    transform: scale(1.05);
-    box-shadow: 0 20px 50px rgba(0, 0, 0, 0.9);
-}
-
+/* Individual Slide */
 .slide {
     display: none;
-    animation: fade-in 1.5s ease-in-out, slide-in 1s ease-out;
-    width: 100%;
-    height: 100%;
-    position: relative;
-    overflow: hidden;
+    animation: fade-in 1.2s ease-in-out;
 }
 
 @keyframes fade-in {
-    0% {
+    from {
         opacity: 0;
         transform: translateY(20px);
     }
-    100% {
+    to {
         opacity: 1;
         transform: translateY(0);
     }
 }
 
-@keyframes slide-in {
-    0% {
-        transform: translateX(100%);
-    }
-    100% {
-        transform: translateX(0);
-    }
-}
-
 .slide img {
     width: 100%;
-    height: 100%;
-    max-height: 100%;
-    object-fit: cover;
-    transition: transform 0.4s ease, filter 0.4s ease, opacity 0.4s ease, box-shadow 0.3s ease;
+    height: auto;
+    max-height: 600px;
     border-radius: 20px;
-    display: block;
-    margin: 0 auto;
-    box-shadow: 0 0 10px rgba(0, 0, 0, 0.4);
-    transform: perspective(500px) rotateX(0deg);
+    object-fit: cover;
+    transition: transform 0.4s ease, filter 0.4s ease, opacity 0.4s ease;
 }
 
 .slide img:hover {
-    transform: scale(1.12) rotateX(10deg);
-    filter: brightness(1.2);
-    opacity: 0.9;
-    box-shadow: 0 0 30px rgba(255, 255, 255, 0.6);
+    transform: scale(1.05);
+    filter: brightness(1.1);
+    opacity: 0.95;
 }
 
+/* Show active slide */
 .active {
     display: block;
 }
 
+/* Popup Styling */
 .popup {
     position: fixed;
-    top: 50%;
-    left: 50%;
-    transform: translate(-50%, -50%);
+    bottom: 20px;
+    right: 20px;
     background: linear-gradient(145deg, #ff8a00, #e52e71);
-    padding: 60px;
+    padding: 50px;
     border-radius: 25px;
     box-shadow: 0 30px 70px rgba(0, 0, 0, 0.8);
     display: none;
     z-index: 1000;
     text-align: center;
     width: 80%;
-    max-width: 480px;
+    max-width: 450px;
     color: #fff;
-    animation: popup-appear 0.8s ease-in-out, bounce 1.5s ease-in-out infinite;
-    transition: transform 0.5s ease, opacity 0.5s ease;
+    animation: slide-in-bottom-right 0.8s ease-in-out;
 }
 
-@keyframes popup-appear {
+/* Keyframes for slide-in animation */
+@keyframes slide-in-bottom-right {
     0% {
-        transform: translate(-50%, -50%) scale(0.9);
+        transform: translateX(50px) translateY(50px);
         opacity: 0;
     }
     100% {
-        transform: translate(-50%, -50%) scale(1);
+        transform: translateX(0) translateY(0);
         opacity: 1;
-    }
-}
-
-@keyframes bounce {
-    0%, 20%, 50%, 80%, 100% {
-        transform: translateY(0);
-    }
-    40% {
-        transform: translateY(-10px);
-    }
-    60% {
-        transform: translateY(-5px);
     }
 }
 
@@ -188,95 +113,61 @@ body {
 }
 
 .popup img:hover {
-    transform: rotate(5deg);
-    opacity: 0.9;
-    filter: brightness(1.1);
+    transform: scale(1.05) rotate(5deg);
+    opacity: 0.95;
 }
 
-.popup h2 {
-    font-size: 2.5rem;
-    margin-bottom: 15px;
-    letter-spacing: 1.5px;
-    text-transform: uppercase;
-    animation: slide-in 1s ease-out;
+/* Overlay for Popup */
+.overlay {
+    position: fixed;
+    top: 0;
+    left: 0;
+    width: 100%;
+    height: 100%;
+    background: rgba(0, 0, 0, 0.6);
+    z-index: 999;
+    display: none;
 }
 
+/* Footer Styling */
 footer {
     text-align: center;
     font-size: 1rem;
     color: #bbb;
-    padding: 35px 0;
+    padding: 25px 0;
     background-color: #181818;
     width: 100%;
+    position: absolute;
+    bottom: 0;
+    left: 0;
     box-shadow: 0 -3px 15px rgba(0, 0, 0, 0.7);
-    animation: fade-up 1.2s ease-in-out;
-    margin-top: auto;
-    transition: padding 0.3s ease;
 }
 
 footer a {
     text-decoration: none;
     color: #ffdd57;
     font-weight: bold;
-    transition: color 0.3s ease, transform 0.3s ease;
+    transition: color 0.3s ease;
 }
 
 footer a:hover {
     color: #ffd700;
-    transform: scale(1.1);
 }
 
-button {
-    padding: 12px 25px;
-    background: linear-gradient(135deg, #ff8a00, #e52e71);
-    border: none;
-    border-radius: 10px;
-    color: white;
-    font-size: 1.1rem;
-    cursor: pointer;
-    transition: transform 0.3s ease, background 0.3s ease, box-shadow 0.3s ease;
-    will-change: transform, background;
-}
-
-button:hover {
-    background: linear-gradient(135deg, #e52e71, #ff8a00);
-    transform: scale(1.05);
-    box-shadow: 0 0 10px rgba(255, 255, 255, 0.3);
-}
-
-button:active {
-    transform: scale(1.02);
-}
-
+/* Responsive Design */
 @media (max-width: 768px) {
     .popup {
-        padding: 40px;
+        bottom: 10px;
+        right: 10px;
+        padding: 30px;
     }
 
     .popup h2 {
         font-size: 2rem;
     }
 
-    button {
-        padding: 10px 20px;
-        font-size: 1rem;
-    }
-}
-
-@media (max-width: 480px) {
-    .slideshow-container {
-        max-width: 95vw;
-        height: 60vh;
-    }
-
-    footer {
-        font-size: 0.9rem;
-        padding: 25px 0;
-    }
-
-    button {
-        padding: 8px 18px;
-        font-size: 0.9rem;
+    .slide img {
+        max-height: 400px;
     }
 }
 
