@@ -27,28 +27,29 @@ body {
     justify-content: center;
     min-height: 100vh;
     padding: 20px;
+    overflow: hidden;
 }
 
 .slideshow-container {
     position: relative;
-    max-width: 90vw; /* Set max width to ensure images don’t overflow */
-    height: 80vh; /* Slightly taller container */
+    max-width: 90vw;
+    height: 80vh;
     margin: 20px auto;
     border: none;
     background: none;
     border-radius: 20px;
     overflow: hidden;
     display: flex;
-    align-items: center; /* Vertically center the images */
-    justify-content: center; /* Horizontally center the images */
-    box-shadow: 0 15px 40px rgba(0, 0, 0, 0.8); /* More prominent shadow */
+    align-items: center;
+    justify-content: center;
+    box-shadow: 0 15px 40px rgba(0, 0, 0, 0.8);
 }
 
 .slide {
     display: none;
     animation: fade-in 1.5s ease-in-out;
-    width: 100%; /* Ensure it takes full width of the container */
-    height: 100%; /* Ensure it takes full height of the container */
+    width: 100%;
+    height: 100%;
     position: relative;
 }
 
@@ -66,17 +67,17 @@ body {
 .slide img {
     width: 100%;
     height: 100%;
-    max-height: 100%; /* Ensure the image doesn't exceed the container's height */
-    object-fit: cover; /* Ensures the image covers the area and maintains the aspect ratio */
-    transition: transform 0.3s ease, filter 0.3s ease, opacity 0.3s ease;
-    border-radius: 20px; /* Added rounded corners */
+    max-height: 100%;
+    object-fit: cover;
+    transition: transform 0.4s ease, filter 0.4s ease, opacity 0.4s ease;
+    border-radius: 20px;
     display: block;
     margin: 0 auto;
 }
 
 .slide img:hover {
-    transform: scale(1.08); /* Slight zoom effect */
-    filter: brightness(1.2); /* Brightness effect */
+    transform: scale(1.1);
+    filter: brightness(1.2);
     opacity: 0.9;
 }
 
@@ -117,11 +118,12 @@ body {
     width: 100%;
     max-width: 280px;
     border-radius: 15px;
-    transition: transform 0.3s ease;
+    transition: transform 0.3s ease, opacity 0.3s ease;
 }
 
 .popup img:hover {
     transform: rotate(5deg);
+    opacity: 0.9;
 }
 
 .popup h2 {
@@ -194,12 +196,17 @@ button {
     color: white;
     font-size: 1.1rem;
     cursor: pointer;
-    transition: transform 0.3s ease, background 0.3s ease;
+    transition: transform 0.3s ease, background 0.3s ease, box-shadow 0.3s ease;
 }
 
 button:hover {
     background: linear-gradient(135deg, #e52e71, #ff8a00);
     transform: scale(1.05);
+    box-shadow: 0 0 10px rgba(255, 255, 255, 0.3);
+}
+
+button:active {
+    transform: scale(1.02);
 }
 
 @media (max-width: 768px) {
@@ -214,6 +221,23 @@ button:hover {
     button {
         padding: 10px 20px;
         font-size: 1rem;
+    }
+}
+
+@media (max-width: 480px) {
+    .slideshow-container {
+        max-width: 95vw; /* Adjust for smaller screens */
+        height: 60vh;
+    }
+
+    footer {
+        font-size: 0.9rem;
+        padding: 25px 0;
+    }
+
+    button {
+        padding: 8px 18px;
+        font-size: 0.9rem;
     }
 }
 
