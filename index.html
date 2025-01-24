@@ -31,25 +31,24 @@ body {
 
 .slideshow-container {
     position: relative;
-    max-width: 95vw;
-    height: 75vh;
-    width: 100%;
-    margin: 30px auto;
+    max-width: 90vw; /* Set max width to ensure images don’t overflow */
+    height: 80vh; /* Slightly taller container */
+    margin: 20px auto;
     border: none;
     background: none;
-    border-radius: 25px;
+    border-radius: 20px;
     overflow: hidden;
     display: flex;
-    align-items: center;
-    justify-content: center;
-    box-shadow: 0 15px 40px rgba(0, 0, 0, 0.9);
+    align-items: center; /* Vertically center the images */
+    justify-content: center; /* Horizontally center the images */
+    box-shadow: 0 15px 40px rgba(0, 0, 0, 0.8); /* More prominent shadow */
 }
 
 .slide {
     display: none;
     animation: fade-in 1.5s ease-in-out;
-    width: 100%;
-    height: 100%;
+    width: 100%; /* Ensure it takes full width of the container */
+    height: 100%; /* Ensure it takes full height of the container */
     position: relative;
 }
 
@@ -66,20 +65,23 @@ body {
 
 .slide img {
     width: 100%;
-    height: auto;
-    max-height: 100%;
-    object-fit: cover;
-    transition: transform 0.4s ease, filter 0.4s ease, opacity 0.4s ease;
-    border-radius: 20px;
+    height: 100%;
+    max-height: 100%; /* Ensure the image doesn't exceed the container's height */
+    object-fit: cover; /* Ensures the image covers the area and maintains the aspect ratio */
+    transition: transform 0.3s ease, filter 0.3s ease, opacity 0.3s ease;
+    border-radius: 20px; /* Added rounded corners */
     display: block;
     margin: 0 auto;
-    box-shadow: 0 10px 30px rgba(0, 0, 0, 0.7);
 }
 
 .slide img:hover {
-    transform: scale(1.08);
-    filter: brightness(1.15);
+    transform: scale(1.08); /* Slight zoom effect */
+    filter: brightness(1.2); /* Brightness effect */
     opacity: 0.9;
+}
+
+.active {
+    display: block;
 }
 
 .popup {
@@ -122,6 +124,34 @@ body {
     transform: rotate(5deg);
 }
 
+.popup h2 {
+    font-size: 2.5rem;
+    margin-bottom: 15px;
+    letter-spacing: 1.5px;
+    text-transform: uppercase;
+    animation: slide-in 1s ease-out;
+}
+
+@keyframes slide-in {
+    0% {
+        transform: translateX(-100%);
+    }
+    100% {
+        transform: translateX(0);
+    }
+}
+
+.overlay {
+    position: fixed;
+    top: 0;
+    left: 0;
+    width: 100%;
+    height: 100%;
+    background: rgba(0, 0, 0, 0.6);
+    z-index: 999;
+    display: none;
+}
+
 footer {
     text-align: center;
     font-size: 1rem;
@@ -155,6 +185,38 @@ footer a {
 footer a:hover {
     color: #ffd700;
 }
+
+button {
+    padding: 12px 25px;
+    background: linear-gradient(135deg, #ff8a00, #e52e71);
+    border: none;
+    border-radius: 10px;
+    color: white;
+    font-size: 1.1rem;
+    cursor: pointer;
+    transition: transform 0.3s ease, background 0.3s ease;
+}
+
+button:hover {
+    background: linear-gradient(135deg, #e52e71, #ff8a00);
+    transform: scale(1.05);
+}
+
+@media (max-width: 768px) {
+    .popup {
+        padding: 30px;
+    }
+
+    .popup h2 {
+        font-size: 2rem;
+    }
+
+    button {
+        padding: 10px 20px;
+        font-size: 1rem;
+    }
+}
+
     </style>
 </head>
     <!--Images to display on the site/screen-->
