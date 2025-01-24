@@ -40,13 +40,6 @@ body {
     100% { background-position: 0% 50%; }
 }
 
-body.light-mode {
-    background: linear-gradient(135deg, #1e3c72, #2a5298, #00aaff);
-    background-size: 400% 400%;
-    animation: gradientAnimation 15s ease infinite;
-    color: #121212;
-}
-
 body::after {
     content: '';
     position: absolute;
@@ -54,8 +47,7 @@ body::after {
     left: 0;
     width: 100%;
     height: 100%;
-    background: url('https://www.transparenttextures.com/patterns/rough-squares.png');
-    opacity: 0.1;
+    background: rgba(0, 0, 0, 0.2);  /* Added dark shadow overlay */
     pointer-events: none;
     z-index: -1;
 }
@@ -72,14 +64,14 @@ body::after {
     display: flex;
     align-items: center;
     justify-content: center;
-    box-shadow: 0 15px 40px rgba(0, 0, 0, 0.8);
+    box-shadow: 0 15px 40px rgba(0, 0, 0, 0.8);  /* Soft shadow for depth */
     transform: scale(1);
     transition: transform 0.5s ease, box-shadow 0.3s ease-in-out;
 }
 
 .slideshow-container:hover {
     transform: scale(1.05);
-    box-shadow: 0 20px 50px rgba(0, 0, 0, 0.9);
+    box-shadow: 0 20px 50px rgba(0, 0, 0, 0.9);  /* Hover shadow effect */
 }
 
 .slide {
@@ -106,18 +98,20 @@ body::after {
     height: 100%;
     max-height: 100%;
     object-fit: cover;
-    transition: transform 0.4s ease, filter 0.4s ease, opacity 0.4s ease, box-shadow 0.3s ease;
+    transition: transform 0.4s ease, filter 0.4s ease, opacity 0.4s ease, box-shadow 0.3s ease, background-color 0.5s ease;
     border-radius: 20px;
     display: block;
     margin: 0 auto;
-    box-shadow: 0 0 10px rgba(0, 0, 0, 0.4);
+    box-shadow: 0 0 10px rgba(0, 0, 0, 0.4);  /* Image shadow */
+    background-color: #000;  /* Dark background during transition */
 }
 
 .slide img:hover {
     transform: scale(1.1);
     filter: brightness(1.3);
     opacity: 0.9;
-    box-shadow: 0 0 20px rgba(255, 255, 255, 0.6);
+    box-shadow: 0 0 20px rgba(255, 255, 255, 0.6);  /* Hover image glow */
+    background-color: #333;  /* Slightly lighter dark on hover */
 }
 
 .active {
