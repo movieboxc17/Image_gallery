@@ -27,15 +27,31 @@ body {
     justify-content: center;
     min-height: 100vh;
     padding: 20px;
+    transition: background 0.5s ease-in-out;
 }
 
-/* Slideshow Container */
+h1 {
+    font-size: 3rem;
+    margin-bottom: 30px;
+    color: #fff;
+    letter-spacing: 2px;
+    text-align: center;
+    animation: fadeIn 2s ease-out;
+}
+
+@keyframes fadeIn {
+    0% { opacity: 0; transform: translateY(-30px); }
+    100% { opacity: 1; transform: translateY(0); }
+}
+
 .slideshow-container {
     position: relative;
     max-width: 1200px;
     width: 100%;
     margin: 20px auto;
     overflow: hidden;
+    border-radius: 20px;
+    box-shadow: 0 20px 40px rgba(0, 0, 0, 0.6);
 }
 
 /* Individual Slide */
@@ -66,7 +82,7 @@ body {
 
 .slide img:hover {
     transform: scale(1.05);
-    filter: brightness(1.1);
+    filter: brightness(1.15);
     opacity: 0.95;
 }
 
@@ -90,7 +106,7 @@ body {
     width: 80%;
     max-width: 450px;
     color: #fff;
-    animation: slide-in-bottom-right 0.8s ease-in-out;
+    animation: slide-in-bottom-right 0.8s ease-in-out, pulse 2s infinite;
 }
 
 /* Keyframes for slide-in animation */
@@ -105,6 +121,19 @@ body {
     }
 }
 
+/* Add a pulse animation for popup */
+@keyframes pulse {
+    0% {
+        transform: scale(1);
+    }
+    50% {
+        transform: scale(1.05);
+    }
+    100% {
+        transform: scale(1);
+    }
+}
+
 .popup img {
     width: 100%;
     max-width: 280px;
@@ -113,7 +142,7 @@ body {
 }
 
 .popup img:hover {
-    transform: scale(1.05) rotate(5deg);
+    transform: scale(1.1) rotate(5deg);
     opacity: 0.95;
 }
 
@@ -141,35 +170,16 @@ footer {
     bottom: 0;
     left: 0;
     box-shadow: 0 -3px 15px rgba(0, 0, 0, 0.7);
+    animation: fade-in-footer 1.5s ease-in-out;
 }
 
-footer a {
-    text-decoration: none;
-    color: #ffdd57;
-    font-weight: bold;
-    transition: color 0.3s ease;
-}
-
-footer a:hover {
-    color: #ffd700;
-}
-
-/* Responsive Design */
-@media (max-width: 768px) {
-    .popup {
-        bottom: 10px;
-        right: 10px;
-        padding: 30px;
+@keyframes fade-in-footer {
+    0% {
+        opacity: 0;
+        transform: translateY(20px);
     }
-
-    .popup h2 {
-        font-size: 2rem;
-    }
-
-    .slide img {
-        max-height: 400px;
-    }
-}
+    100% {
+        opacity
 
     </style>
 </head>
