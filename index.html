@@ -52,6 +52,14 @@ h1 {
     overflow: hidden;
     border-radius: 20px;
     box-shadow: 0 20px 40px rgba(0, 0, 0, 0.6);
+    background: rgba(0, 0, 0, 0.2);
+    padding: 15px;
+    backdrop-filter: blur(10px);
+    transition: transform 0.3s ease;
+}
+
+.slideshow-container:hover {
+    transform: translateY(-5px);
 }
 
 /* Individual Slide */
@@ -78,6 +86,7 @@ h1 {
     border-radius: 20px;
     object-fit: cover;
     transition: transform 0.4s ease, filter 0.4s ease, opacity 0.4s ease;
+    position: relative;
 }
 
 .slide img:hover {
@@ -86,64 +95,116 @@ h1 {
     opacity: 0.95;
 }
 
+.slide img::after {
+    content: '';
+    position: absolute;
+    top: 0;
+    left: 0;
+    width: 100%;
+    height: 100%;
+    background: linear-gradient(45deg, rgba(0,0,0,0.2), transparent);
+}
+
+/* Show active slide */
 /* Show active slide */
 .active {
     display: block;
 }
 
-/* Popup Styling */
+/* Bubble styling */
+.bubble {
+    position: fixed;
+    bottom: 20px;
+    right: 20px;
+    width: 60px;
+    height: 60px;
+    background: linear-gradient(145deg, #ff8a00, #e52e71);
+    border-radius: 50%;
+    box-shadow: 0 5px 20px rgba(0, 0, 0, 0.3);
+    z-index: 999;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    cursor: pointer;
+}
+
+.bubble i {
+    color: white;
+    font-size: 24px;
+}
+
+/* Enhanced Popup with Glow Effect */
 .popup {
     position: fixed;
     bottom: 20px;
     right: 20px;
     background: linear-gradient(145deg, #ff8a00, #e52e71);
-    padding: 50px;
+    padding: 30px;
     border-radius: 25px;
-    box-shadow: 0 30px 70px rgba(0, 0, 0, 0.8);
-    display: none;
+    box-shadow: 0 20px 50px rgba(0, 0, 0, 0.5),
+                0 5px 15px rgba(229, 46, 113, 0.3),
+                0 0 30px rgba(255, 138, 0, 0.2);
     z-index: 1000;
     text-align: center;
-    width: 80%;
-    max-width: 450px;
+    width: 350px;
     color: #fff;
-    animation: slide-in-bottom-right 0.8s ease-in-out, pulse 2s infinite;
+    backdrop-filter: blur(12px);
+    transform: scale(0);
+    transition: transform 0.6s cubic-bezier(0.34, 1.56, 0.64, 1);
 }
 
-/* Keyframes for slide-in animation */
-@keyframes slide-in-bottom-right {
-    0% {
-        transform: translateX(50px) translateY(50px);
-        opacity: 0;
-    }
-    100% {
-        transform: translateX(0) translateY(0);
-        opacity: 1;
-    }
-}
-
-/* Add a pulse animation for popup */
-@keyframes pulse {
-    0% {
-        transform: scale(1);
-    }
-    50% {
-        transform: scale(1.05);
-    }
-    100% {
-        transform: scale(1);
-    }
+.popup.show {
+    transform: scale(1);
 }
 
 .popup img {
-    width: 100%;
-    max-width: 280px;
+    width: 250px;
+    height: 250px;
+    object-fit: contain;
+    margin: 15px auto;
     border-radius: 15px;
-    transition: transform 0.3s ease, opacity 0.3s ease, filter 0.3s ease;
+    background: white;
+    padding: 10px;
+    box-shadow: 0 10px 30px rgba(0, 0, 0, 0.3),
+                0 0 20px rgba(229, 46, 113, 0.2);
+    transform: translateY(20px);
+    opacity: 0;
+    transition: all 0.6s cubic-bezier(0.34, 1.56, 0.64, 1) 0.2s;
+}
+
+.popup.show img {
+    transform: translateY(0);
+    opacity: 1;
 }
 
 .popup img:hover {
-    transform: scale(1.1) rotate(5deg);
-    opacity: 0.95;
+    transform: scale(1.03) rotate(1deg);
+    box-shadow: 0 20px 50px rgba(0, 0, 0, 0.5);
+}
+
+/* Enhance popup text */
+.popup h2 {
+    font-size: 1.6rem;
+    margin-bottom: 15px;
+    text-shadow: 2px 2px 4px rgba(0, 0, 0, 0.2);
+    transform: translateY(15px);
+    opacity: 0;
+    transition: all 0.6s cubic-bezier(0.34, 1.56, 0.64, 1) 0.3s;
+}
+
+.popup p {
+    font-size: 1.2rem;
+    font-weight: 500;
+    margin-top: 15px;
+    transform: translateY(15px);
+    opacity: 0;
+    transition: all 0.6s cubic-bezier(0.34, 1.56, 0.64, 1) 0.4s;
+}
+
+.popup.show h2,
+.popup.show p {
+    transform: translateY(0);
+    opacity: 1;
 }
 
 /* Overlay for Popup */
@@ -158,36 +219,322 @@ h1 {
     display: none;
 }
 
-/* Footer Styling */
-footer {
-    text-align: center;
-    font-size: 1rem;
-    color: #bbb;
-    padding: 25px 0;
-    background-color: #181818;
+/* Enhanced shadows and styling */
+.shoutout-banner {
+    position: fixed;
+    top: 0;
+    left: 0;
     width: 100%;
+    background: linear-gradient(45deg, #ff8a00, #e52e71);
+    padding: 8px 20px;
+    text-align: center;
+    z-index: 1000;
+    box-shadow: 0 5px 25px rgba(229, 46, 113, 0.3);
+    backdrop-filter: blur(12px);
+}
+
+.slideshow-container {
+    box-shadow: 0 20px 50px rgba(0, 0, 0, 0.5),
+                0 5px 15px rgba(229, 46, 113, 0.2);
+    border-radius: 25px;
+    padding: 10px;
+}
+
+/* Popup and Bubble Animations */
+.bubble {
+    position: fixed;
+    animation: float 3s ease-in-out infinite;
+    transition: all 0.4s cubic-bezier(0.34, 1.56, 0.64, 1);
+}
+
+@keyframes float {
+    0% { transform: translateY(0px) rotate(0deg); }
+    50% { transform: translateY(-10px) rotate(5deg); }
+    100% { transform: translateY(0px) rotate(0deg); }
+}
+
+.slideshow-container {
+    background: rgba(0, 0, 0, 0.2);
+    backdrop-filter: blur(8px);
+}
+
+.slide img {
+    border-radius: 20px;
+    transition: transform 0.4s cubic-bezier(0.4, 0, 0.2, 1);
+    box-shadow: 0 10px 30px rgba(0, 0, 0, 0.3);
+}
+
+.slide img:hover {
+    transform: scale(1.02) translateY(-5px);
+    box-shadow: 0 15px 40px rgba(229, 46, 113, 0.3);
+}
+  /* Fixed Footer Styling */
+  footer {
+      text-align: center;
+      font-size: 0.85rem;
+      background: linear-gradient(45deg, #ff8a00, #e52e71);
+      width: 100%;
+      position: fixed;
+      bottom: 0;
+      left: 0;
+      padding: 8px 0;
+      box-shadow: 0 -5px 25px rgba(229, 46, 113, 0.3);
+      z-index: 999;
+  }
+
+  footer p {
+      margin: 2px 0;
+      color: #ffffff;
+      line-height: 1.1;
+      text-shadow: 1px 1px 3px rgba(0, 0, 0, 0.2);
+  }
+
+  footer a {
+      color: #ffffff;
+      font-weight: 600;
+      padding: 1px 6px;
+      border-radius: 3px;
+      transition: all 0.3s ease;
+      text-decoration: none;
+      display: inline-block;
+  }
+
+  footer a:hover {
+      background: rgba(255, 255, 255, 0.2);
+      transform: translateY(-1px);
+  }
+
+  /* Version number styling */
+  footer p:last-child {
+      font-size: 0.75rem;
+      opacity: 0.9;
+  }
+
+  /* Instagram mention styling */
+  footer p:nth-last-child(2) {
+      font-weight: 600;
+      letter-spacing: 0.5px;
+  }
+/* New enhancements */
+/* Image hover effect */
+.slide img {
+    filter: brightness(0.95);
+    transition: all 0.5s cubic-bezier(0.4, 0, 0.2, 1);
+}
+
+/* Smooth slide transitions */
+.slide {
+    transform-origin: center;
+    transition: all 0.8s cubic-bezier(0.4, 0, 0.2, 1);
+}
+
+.slide.active {
+    animation: slideZoom 0.8s cubic-bezier(0.34, 1.56, 0.64, 1);
+}
+
+@keyframes slideZoom {
+    0% { transform: scale(0.95); opacity: 0; }
+    100% { transform: scale(1); opacity: 1; }
+}
+
+/* Enhanced hover effects for images */
+.slide img:hover {
+    transform: scale(1.03) translateY(-5px);
+    box-shadow: 0 25px 50px rgba(229, 46, 113, 0.3);
+    filter: brightness(1.1) contrast(1.1);
+}
+
+/* Enhanced popup styling */
+.popup {
+    padding: 30px;
+    transform-origin: bottom right;
+}
+
+.popup h2 {
+    font-size: 1.6rem;
+    font-weight: 600;
+    margin-bottom: 15px;
+    background: linear-gradient(45deg, #fff, #f0f0f0);
+    -webkit-background-clip: text;
+    background-clip: text;
+    -webkit-text-fill-color: transparent;
+}
+
+/* Custom scrollbar */
+::-webkit-scrollbar {
+    width: 8px;
+}
+::-webkit-scrollbar-track {
+    background: #121212;
+}
+
+::-webkit-scrollbar-thumb {
+    background: linear-gradient(45deg, #ff8a00, #e52e71);
+    border-radius: 4px;
+}
+
+/* Enhanced scrollbar */
+::-webkit-scrollbar-thumb:hover {
+    background: linear-gradient(45deg, #e52e71, #ff8a00);
+}
+
+/* Loading animation */
+@keyframes shimmer {
+    0% {
+        background-position: -1000px 0;
+    }
+    100% {
+        background-position: 1000px 0;
+    }
+}
+
+.slide.loading {
+    background: linear-gradient(90deg, #222 25%, #333 50%, #222 75%);
+    background-size: 1000px 100%;
+    animation: shimmer 2s infinite linear;
+}
+
+/* Refined Shoutout Banner with consistent colors */
+.shoutout-banner {
+    position: fixed;
+    top: 0;
+    left: 0;
+    width: 100%;
+    background: linear-gradient(270deg, #ff8a00, #e52e71, #ff8a00);
+    background-size: 200% 200%;
+    padding: 15px 30px;
+    text-align: center;
+    z-index: 1000;
+    animation: gradientWave 8s ease infinite;
+    box-shadow: 0 5px 25px rgba(0, 0, 0, 0.5);
+    backdrop-filter: blur(10px);
+}
+
+@keyframes gradientWave {
+    0% { background-position: 0% 50%; }
+    50% { background-position: 100% 50%; }
+    100% { background-position: 0% 50%; }
+}
+
+.shoutout-text {
+    font-size: 1.3rem;
+    font-weight: 600;
+    letter-spacing: 1px;
+    color: #ffffff;
+    text-shadow: 2px 2px 4px rgba(0, 0, 0, 0.3);
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    gap: 15px;
+}
+
+/* Icon styling with matching colors */
+.shoutout-text i,
+.shoutout-text emoji {
+    font-size: 1.5rem;
+    color: #ffffff;
+    text-shadow: 2px 2px 4px rgba(0, 0, 0, 0.3);
+}
+
+/* Fancy footer hover effects */
+footer a {
+    position: relative;
+    overflow: hidden;
+}
+
+footer a::after {
+    content: '';
     position: absolute;
     bottom: 0;
     left: 0;
-    box-shadow: 0 -3px 15px rgba(0, 0, 0, 0.7);
-    animation: fade-in-footer 1.5s ease-in-out;
+    width: 100%;
+    height: 2px;
+    background: #fff;
+    transform: scaleX(0);
+    transform-origin: right;
+    transition: transform 0.4s cubic-bezier(0.4, 0, 0.2, 1);
 }
 
-@keyframes fade-in-footer {
-    0% {
+footer a:hover::after {
+    transform: scaleX(1);
+    transform-origin: left;
+}
+
+/* Page load animation */
+.content-wrapper {
+    animation: pageLoad 1s cubic-bezier(0.4, 0, 0.2, 1);
+}
+
+@keyframes pageLoad {
+    from {
         opacity: 0;
         transform: translateY(20px);
     }
-    100% {
-        opacity
+    to {
+        opacity: 1;
+        transform: translateY(0);
+    }
+}
+
+/* Smooth scroll behavior */
+html {
+    scroll-behavior: smooth;
+}
+
+/* Responsive adjustments */
+@media (max-width: 768px) {
+    .shoutout-text {
+        font-size: 0.9rem;
+    }
+    
+    .shoutout-text i,
+    .shoutout-text emoji {
+        font-size: 1.1rem;
+    }
+}
 
     </style>
 </head>
     <!--Images to display on the site/screen-->
+    <div class="shoutout-banner">
+        <div class="news-cycle">
+            <div class="shoutout-text">🆕 New photos added daily</div>
+            <div class="shoutout-text">📱 Follow us on Instagram @the.photographers3</div>
+            <div class="shoutout-text">🔥 Site Version 1.9 Beta is now live</div>
+            <div class="shoutout-text">🔥 Check out our image Gallery: https://movieboxc17.github.io/Photography-Portfolio/ </div>
+        </div>
+    </div>
+    
 <body>
     <div class="content-wrapper">
         <div class="slideshow-container">
-           <div class="slide"><img src="https://i.ibb.co/1mRXkJN/3814348.jpg" alt="Gallery Image Error"></div>
+            <div class="slide active"><img src="https://i.ibb.co/fSKdDt0/F-r-06.jpg" alt="Gallery Image 1"></div>
+            <div class="slide"><img src="https://i.ibb.co/fSKdDt0/F-r-06.jpg" alt="Gallery Image 2"></div>
+            <div class="slide"><img src="https://i.ibb.co/q7561nw/F-r-03.jpg" alt="Gallery Image 3"></div>
+            <div class="slide"><img src="https://i.ibb.co/q7561nw/F-r-03.jpg" alt="Gallery Image 4"></div>
+            <div class="slide"><img src="https://i.ibb.co/7g4WKxh/F-r-05.jpg" alt="Gallery Image 5"></div>
+            <div class="slide"><img src="https://i.ibb.co/w4M9RrC/F-r-07.jpg" alt="Gallery Image 6"></div>
+            <div class="slide"><img src="https://i.ibb.co/9GxVrmy/F-r-02.jpg" alt="Gallery Image 7"></div>
+            <div class="slide"><img src="https://i.ibb.co/r5fXL1j/F-r-08.jpg" alt="Gallery Image 8"></div>
+            <div class="slide"><img src="https://i.ibb.co/2W1nMmb/F-r-09.jpg" alt="Gallery Image 9"></div>
+            <div class="slide"><img src="https://i.ibb.co/tXRyTdz/Brun-H-st-2.jpg" alt="Gallery Image 10"></div>
+            <div class="slide"><img src="https://i.ibb.co/R4sT1g2/H-st-Krig-3.jpg" alt="Gallery Image 11"></div>
+            <div class="slide"><img src="https://i.ibb.co/2ywnfZ7/H-st-Krig-5.jpg" alt="Gallery Image 12"></div>
+            <div class="slide"><img src="https://i.ibb.co/pRcpjKk/Snapseed-nef.jpg" alt="Gallery Image 21"></div>
+            <div class="slide"><img src="https://i.ibb.co/Vvmy7HD/Snapseed-nef-2.jpg" alt="Gallery Image 13"></div>
+            <div class="slide"><img src="https://i.ibb.co/djZGrZr/Snapseed-nef-3.jpg" alt="Gallery Image 14"></div>
+            <div class="slide"><img src="https://i.ibb.co/tsTFQ27/St-vel-01.jpg" alt="Gallery Image 15"></div>
+            <div class="slide"><img src="https://i.ibb.co/4gFYtKJ/IMG-0373.jpg" alt="Gallery Image 16"></div>
+            <div class="slide"><img src="https://i.ibb.co/XVwBtBN/IMG-0705-1.jpg" alt="Gallery Image 17"></div>
+            <div class="slide"><img src="https://i.ibb.co/7NCc9xX/IMG-0674.jpg" alt="Gallery Image 18"></div>
+            <div class="slide"><img src="https://i.ibb.co/gwcZmyr/Attachment-1-1.jpg" alt="Gallery Image 19"></div>
+            <div class="slide"><img src="https://i.ibb.co/TLFh5py/bild-1.jpg" alt="Gallery Image 21"></div>
+            <div class="slide"><img src="https://i.ibb.co/Y09npZ3/IMG-1111.jpg" alt="Gallery Image 23"></div>
+            <div class="slide"><img src="https://i.ibb.co/vqHhsH6/Snapseed.jpg" alt="Gallery Image 24"></div>
+            <div class="slide"><img src="https://i.ibb.co/bzfsV6D/Elsk-p-01.jpg" alt="Gallery Image 20"></div>
+            <div class="slide"><img src="https://i.ibb.co/p1kNp9M/Snapseed.jpg" alt="Gallery Image 25"></div>  
+            <div class="slide"><img src="https://i.ibb.co/hZXcWxr/IMG-0773.jpg" alt="Gallery Image 22"></div>
+            <div class="slide"><img src="https://i.ibb.co/qpbVRTQ/Attachment-1.jpg" alt="Gallery Image 26"></div> 
         </div>
     </div>
 
@@ -197,12 +544,12 @@ footer {
         <p>Photos taken by Askansz & Moviebox C17</p>
         <p>Site coded by Moviebox c17</p>
         <p>Follow Us on Instagram: @the.photographers3</p>
-        <p>V 1.2 Beta</p>
+        <p>V 1.9 Beta</p>
         <!--- <p>We apologize for any issues with the site. Our team is currently working to resolve the problem.</p> --->
     </footer>
 
     <div class="popup">
-        <h2>Follow Us on Instagram!</h2>
+        <h2>Please Follow Us on Instagram!</h2>
         <img src="https://i.ibb.co/nLBtPj6/IMG-1109.jpg" alt="Instagram QR Code">
         <p>@the.photographers3</p>
     </div>
@@ -229,15 +576,27 @@ footer {
         const popup = document.querySelector('.popup');
         const overlay = document.querySelector('.overlay');
 
-        const showPopup = () => {
-            popup.style.display = 'block';
-            overlay.style.display = 'block';
+        // Add this to your existing script
+        const bubble = document.createElement('div');
+        bubble.className = 'bubble';
+        bubble.innerHTML = '<i class="fab fa-instagram"></i>';
+        document.body.appendChild(bubble);
 
+        const showPopup = () => {
+            popup.classList.add('show');
+            bubble.style.opacity = '0';
+            
             setTimeout(() => {
-                popup.style.display = 'none';
-                overlay.style.display = 'none';
-            }, 25000); // Popup stays for 25 seconds
+                popup.classList.add('hide');
+                bubble.style.opacity = '1';
+                
+                setTimeout(() => {
+                    popup.classList.remove('show', 'hide');
+                }, 500);
+            }, 25000);
         };
+
+        // Update the interval
         setInterval(showPopup, 90000);
 
         // Auto-refresh the page every 90 seconds using JavaScript
@@ -247,5 +606,4 @@ footer {
 
         updateActiveState();
     </script>
-</body>
-</html>
+    </body></html>
