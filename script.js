@@ -63,7 +63,7 @@ async function updateWeather() {
     }
 }
 
-// Rest of your existing slideshow and popup code remains the same
+// Slideshow functionality
 const updateActiveState = () => {
     slides.forEach((slide, i) => {
         slide.classList.toggle('active', i === currentIndex);
@@ -75,6 +75,7 @@ const nextSlide = () => {
     updateActiveState();
 };
 
+// Popup functionality
 const popup = document.querySelector('.popup');
 const showPopup = () => {
     popup.classList.add('show');
@@ -89,6 +90,3 @@ updateActiveState();
 setInterval(nextSlide, 6000);
 setInterval(updateWeather, 1800000);
 setInterval(showPopup, 90000);
-setTimeout(() => {
-    location.reload();
-}, 900000);
