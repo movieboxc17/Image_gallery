@@ -1,0 +1,124 @@
+/* Modern enhancements and animations */
+:root {
+    --primary-gradient: linear-gradient(45deg, #ff8a00, #e52e71);
+    --glass-effect: rgba(255, 255, 255, 0.1);
+    --shadow-effect: 0 10px 30px rgba(0, 0, 0, 0.3);
+}
+
+/* Enhanced Weather Bar */
+.weather-bar {
+    background: var(--primary-gradient);
+    backdrop-filter: blur(10px);
+    box-shadow: 0 5px 15px rgba(0, 0, 0, 0.2);
+    font-size: 1.2rem;
+    letter-spacing: 0.5px;
+}
+
+.weather-bar .temp {
+    text-shadow: 2px 2px 4px rgba(0, 0, 0, 0.2);
+    font-weight: 500;
+}
+
+/* Enhanced Slideshow */
+.slideshow-container {
+    transform: perspective(1000px) rotateX(2deg);
+    transition: transform 0.5s ease;
+}
+
+.slideshow-container:hover {
+    transform: perspective(1000px) rotateX(0deg);
+}
+
+.slide img {
+    filter: brightness(1.1) contrast(1.1);
+    transition: all 0.5s cubic-bezier(0.4, 0, 0.2, 1);
+}
+
+.slide.active img {
+    animation: zoomInOut 12s infinite alternate;
+}
+
+/* Enhanced Footer */
+footer {
+    background: var(--primary-gradient);
+    backdrop-filter: blur(5px);
+    padding: 15px 0;
+    font-size: 0.9rem;
+    letter-spacing: 0.5px;
+}
+
+footer a {
+    position: relative;
+    overflow: hidden;
+}
+
+footer a::after {
+    content: '';
+    position: absolute;
+    bottom: 0;
+    left: 0;
+    width: 100%;
+    height: 2px;
+    background: white;
+    transform: scaleX(0);
+    transition: transform 0.3s ease;
+}
+
+footer a:hover::after {
+    transform: scaleX(1);
+}
+
+/* Enhanced Popup */
+.popup {
+    background: var(--primary-gradient);
+    border: 2px solid rgba(255, 255, 255, 0.1);
+    animation: floatIn 0.5s ease-out;
+}
+
+.popup img {
+    border-radius: 15px;
+    box-shadow: var(--shadow-effect);
+    transition: transform 0.3s ease;
+}
+
+.popup img:hover {
+    transform: scale(1.05);
+}
+
+/* Animations */
+@keyframes zoomInOut {
+    0% { transform: scale(1); }
+    50% { transform: scale(1.05); }
+    100% { transform: scale(1); }
+}
+
+@keyframes floatIn {
+    from {
+        opacity: 0;
+        transform: translateY(20px) scale(0.9);
+    }
+    to {
+        opacity: 1;
+        transform: translateY(0) scale(1);
+    }
+}
+
+/* Modern Glass Effect */
+.glass-effect {
+    background: var(--glass-effect);
+    backdrop-filter: blur(10px);
+    border: 1px solid rgba(255, 255, 255, 0.1);
+    box-shadow: var(--shadow-effect);
+}
+
+/* Responsive Enhancements */
+@media (max-width: 768px) {
+    .weather-bar {
+        font-size: 1rem;
+        padding: 8px 15px;
+    }
+    
+    .slideshow-container {
+        transform: none;
+    }
+}
