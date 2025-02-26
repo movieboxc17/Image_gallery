@@ -18,7 +18,15 @@ body {
     transition: background 0.5s ease-in-out;
 }
 
-/* Weather Bar Styles */
+h1 {
+    font-size: 3rem;
+    margin-bottom: 30px;
+    color: #fff;
+    letter-spacing: 2px;
+    text-align: center;
+    animation: fadeIn 2s ease-out;
+}
+
 .weather-bar {
     position: fixed;
     top: 0;
@@ -61,15 +69,6 @@ body {
     font-weight: 500;
 }
 
-h1 {
-    font-size: 3rem;
-    margin-bottom: 30px;
-    color: #fff;
-    letter-spacing: 2px;
-    text-align: center;
-    animation: fadeIn 2s ease-out;
-}
-
 @keyframes fadeIn {
     0% { opacity: 0; transform: translateY(-30px); }
     100% { opacity: 1; transform: translateY(0); }
@@ -101,14 +100,8 @@ h1 {
 }
 
 @keyframes fade-in {
-    from {
-        opacity: 0;
-        transform: translateY(20px);
-    }
-    to {
-        opacity: 1;
-        transform: translateY(0);
-    }
+    from { opacity: 0; transform: translateY(20px); }
+    to { opacity: 1; transform: translateY(0); }
 }
 
 .slide.active {
@@ -130,16 +123,6 @@ h1 {
     transform: scale(1.05);
     filter: brightness(1.15);
     opacity: 0.95;
-}
-
-.slide img::after {
-    content: '';
-    position: absolute;
-    top: 0;
-    left: 0;
-    width: 100%;
-    height: 100%;
-    background: linear-gradient(45deg, rgba(0,0,0,0.2), transparent);
 }
 
 .bubble {
@@ -276,57 +259,28 @@ footer a:hover {
     transform: translateY(-1px);
 }
 
-footer a::after {
-    content: '';
-    position: absolute;
-    bottom: 0;
-    left: 0;
-    width: 100%;
-    height: 2px;
-    background: #fff;
-    transform: scaleX(0);
-    transform-origin: right;
-    transition: transform 0.4s cubic-bezier(0.4, 0, 0.2, 1);
-}
-
-footer a:hover::after {
-    transform: scaleX(1);
-    transform-origin: left;
-}
-
-::-webkit-scrollbar {
-    width: 8px;
-}
-
-::-webkit-scrollbar-track {
-    background: #121212;
-}
-
-::-webkit-scrollbar-thumb {
-    background: linear-gradient(45deg, #ff8a00, #e52e71);
-    border-radius: 4px;
-}
-
-::-webkit-scrollbar-thumb:hover {
-    background: linear-gradient(45deg, #e52e71, #ff8a00);
-}
-
 @media (max-width: 768px) {
     .weather-bar {
-        padding: 8px 10px;
+        padding: 5px 10px;
         gap: 15px;
     }
-    
+
     .forecast-container {
         gap: 10px;
     }
-    
+
     .weather-icon {
         width: 25px;
         height: 25px;
     }
-    
+
     .day-name, .temp {
         font-size: 0.9rem;
+    }
+}
+
+@media (max-width: 480px) {
+    .forecast-container {
+        display: none;
     }
 }
