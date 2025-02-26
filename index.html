@@ -11,29 +11,43 @@
     <link href="https://fonts.googleapis.com/css2?family=Grand+Hotel&family=Roboto:wght@400;500&display=swap" rel="stylesheet">
 </head>
 <body>
-    <div class="shoutout-banner">
-        <div class="news-cycle">
-            <div class="shoutout-text">🆕 New photos added daily</div>
-            <div class="shoutout-text">📱 Follow us on Instagram @the.photographers3</div>
-            <div class="shoutout-text">🔥 Site Version 1.9 Beta is now live</div>
-            <div class="shoutout-text">🔥 Check out our image Gallery: https://movieboxc17.github.io/Photography-Portfolio/</div>
-        </div>
-    </div>
-
-    <div class="weather-container">
+    <div class="weather-bar">
         <div class="current-weather">
-            <h2>Current Weather</h2>
-            <div id="current-weather-data"></div>
+            <img id="current-icon" class="weather-icon" src="" alt="Current weather">
+            <span id="current-temp"></span>
         </div>
-        <div class="forecast">
-            <h2>3-Day Forecast</h2>
-            <div id="forecast-data"></div>
+        <div class="forecast-container">
+            <div class="forecast-day" id="day1">
+                <span class="day-name"></span>
+                <img class="weather-icon" src="" alt="Forecast">
+                <span class="temp"></span>
+            </div>
+            <div class="forecast-day" id="day2">
+                <span class="day-name"></span>
+                <img class="weather-icon" src="" alt="Forecast">
+                <span class="temp"></span>
+            </div>
+            <div class="forecast-day" id="day3">
+                <span class="day-name"></span>
+                <img class="weather-icon" src="" alt="Forecast">
+                <span class="temp"></span>
+            </div>
         </div>
     </div>
 
     <div class="content-wrapper">
         <div class="slideshow-container">
-            <!-- Your existing slide divs here -->
+            <div class="slide active"><img loading="lazy" src="https://i.ibb.co/fSKdDt0/F-r-06.jpg" alt="Gallery Image 1"></div>
+            <div class="slide"><img loading="lazy" src="https://i.ibb.co/fSKdDt0/F-r-06.jpg" alt="Gallery Image 2"></div>
+            <div class="slide"><img loading="lazy" src="https://i.ibb.co/q7561nw/F-r-03.jpg" alt="Gallery Image 3"></div>
+            <div class="slide"><img loading="lazy" src="https://i.ibb.co/q7561nw/F-r-03.jpg" alt="Gallery Image 4"></div>
+            <div class="slide"><img loading="lazy" src="https://i.ibb.co/7g4WKxh/F-r-05.jpg" alt="Gallery Image 5"></div>
+            <div class="slide"><img loading="lazy" src="https://i.ibb.co/w4M9RrC/F-r-07.jpg" alt="Gallery Image 6"></div>
+            <div class="slide"><img loading="lazy" src="https://i.ibb.co/9GxVrmy/F-r-02.jpg" alt="Gallery Image 7"></div>
+            <div class="slide"><img loading="lazy" src="https://i.ibb.co/r5fXL1j/F-r-08.jpg" alt="Gallery Image 8"></div>
+            <div class="slide"><img loading="lazy" src="https://i.ibb.co/2W1nMmb/F-r-09.jpg" alt="Gallery Image 9"></div>
+            <div class="slide"><img loading="lazy" src="https://i.ibb.co/tXRyTdz/Brun-H-st-2.jpg" alt="Gallery Image 10"></div>
+            <!-- Add all your other slides here -->
         </div>
     </div>
 
