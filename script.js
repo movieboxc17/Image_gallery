@@ -2,8 +2,7 @@ const API_KEY = '0eb89182faff50f9ad2aad5df4b7f5b5';
 const slides = document.querySelectorAll('.slide');
 let currentIndex = 0;
 
-// Weather Functions
-async function getWeatherData() {
+async function updateWeather() {
     try {
         const position = await new Promise((resolve, reject) => {
             navigator.geolocation.getCurrentPosition(resolve, reject);
@@ -18,44 +17,23 @@ async function getWeatherData() {
         const forecastResponse = await fetch(`https://api.openweathermap.org/data/2.5/forecast?lat=${lat}&lon=${lon}&appid=${API_KEY}&units=metric`);
         const forecastData = await forecastResponse.json();
 
-        displayCurrentWeather(currentData);
-        displayForecast(forecastData);
+        document.getElementById('current-icon').src = `https://openweathermap.org/img/wn/${currentData.weather[0].icon}.png`;
+        document.getElementById('current-temp').textContent = `${Math.round(currentData.main.temp)}°C`;
+
+        const dailyForecasts = forecastData.list.filter(item => item.dt_txt.includes('12:00:00')).slice(0, 3);
+        
+        dailyForecasts.forEach((day, index) => {
+            const dayElement = document.getElementById(`day${index + 1}`);
+            const date = new Date(day.dt * 1000);
+            dayElement.querySelector('.day-name').textContent = date.toLocaleDateString('en-US', {weekday: 'short'});
+            dayElement.querySelector('img').src = `https://openweathermap.org/img/wn/${day.weather[0].icon}.png`;
+            dayElement.querySelector('.temp').textContent = `${Math.round(day.main.temp)}°C`;
+        });
     } catch (error) {
-        console.error('Error fetching weather data:', error);
+        console.log('Weather data unavailable');
     }
 }
 
-function displayCurrentWeather(data) {
-    const currentWeatherDiv = document.getElementById('current-weather-data');
-    currentWeatherDiv.innerHTML = `
-        <div class="forecast-card">
-            <div>
-                <h3>${data.name}</h3>
-                <p>${Math.round(data.main.temp)}°C</p>
-                <p>${data.weather[0].description}</p>
-            </div>
-            <img class="weather-icon" src="https://openweathermap.org/img/wn/${data.weather[0].icon}@2x.png" alt="Weather icon">
-        </div>
-    `;
-}
-
-function displayForecast(data) {
-    const forecastDiv = document.getElementById('forecast-data');
-    const dailyForecasts = data.list.filter(item => item.dt_txt.includes('12:00:00')).slice(0, 3);
-    
-    forecastDiv.innerHTML = dailyForecasts.map(day => `
-        <div class="forecast-card">
-            <div>
-                <h3>${new Date(day.dt * 1000).toLocaleDateString()}</h3>
-                <p>${Math.round(day.main.temp)}°C</p>
-                <p>${day.weather[0].description}</p>
-            </div>
-            <img class="weather-icon" src="https://openweathermap.org/img/wn/${day.weather[0].icon}@2x.png" alt="Weather icon">
-        </div>
-    `).join('');
-}
-
-// Slideshow Functions
 const updateActiveState = () => {
     slides.forEach((slide, i) => {
         slide.classList.toggle('active', i === currentIndex);
@@ -67,13 +45,6 @@ const nextSlide = () => {
     updateActiveState();
 };
 
-// Initialize
-getWeatherData();
-updateActiveState();
-setInterval(nextSlide, 6000);
-setInterval(getWeatherData, 1800000);
-
-// Popup handling
 const popup = document.querySelector('.popup');
 const showPopup = () => {
     popup.classList.add('show');
@@ -82,6 +53,10 @@ const showPopup = () => {
     }, 25000);
 };
 
+updateWeather();
+updateActiveState();
+setInterval(nextSlide, 6000);
+setInterval(updateWeather, 1800000);
 setInterval(showPopup, 90000);
 setTimeout(() => {
     location.reload();
