@@ -90,17 +90,30 @@ body {
     padding: 15px;
     backdrop-filter: blur(10px);
     transition: transform 0.3s ease;
-    aspect-ratio: 16/9; /* Maintaining aspect ratio */
-    max-height: 80vh; /* Increased from 70vh to 80vh */
-    margin: 0 auto; /* Center the container */
-    max-width: 1600px; /* Increased max-width */
+    /* Increased height */
+    height: 85vh; /* Changed from 80vh to 85vh for more height */
+    margin: 0 auto;
+    max-width: 90vw; /* Wide container (90% of viewport width) */
+    min-width: 80vw; /* Ensures minimum width */
     transform-style: preserve-3d;
     will-change: transform;
     backface-visibility: hidden;
 }
-
 .slideshow-container:hover {
     transform: translateY(-5px);
+}
+
+/* Update the main container to allow more space */
+.main-container {
+    margin-top: 80px;
+    max-width: 95%;
+    margin-left: auto;
+    margin-right: auto;
+    margin-bottom: 60px; /* Increased from 40px to accommodate taller slideshow */
+}
+
+body {
+    padding-bottom: 100px; /* Increased from 80px to give more space at bottom */
 }
 
 /* Adjusting for larger container in responsive design */
@@ -137,13 +150,32 @@ body {
     display: block;
     opacity: 1;
 }
-.slide img {
+
+/* Add adaptive image container */
+.slide-image-container {
     width: 100%;
     height: 100%;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+}
+
+/* Update image styling */
+.slide img {
+    max-width: 100%;
+    max-height: 100%;
     border-radius: 15px;
-    object-fit: contain; /* Changed from 'cover' to 'contain' to ensure full image is visible */
+    object-fit: contain;
     transition: transform 0.6s ease;
 }
+
+/* Special handling for portrait/vertical images - increased width */
+.slide.portrait img {
+    max-height: 100%;
+    max-width: 80%; /* Increased from 65% to 80% for wider display */
+    margin: 0 auto;
+}
+
 .slide img.zoomed {
     transform: scale(1.1);
     cursor: zoom-out;
@@ -220,22 +252,40 @@ body {
 /* Image captions and location badges */
 .location-badge {
     position: absolute;
-    bottom: 20px;
+    bottom: 40px; /* Increased from 20px to move it up */
     left: 20px;
     background: linear-gradient(45deg, #ff8a00, #e52e71);
     color: white;
-    padding: 8px 15px;
+    padding: 10px 18px;
     border-radius: 20px;
     font-weight: 500;
+    font-size: 1.1rem;
     z-index: 5;
     transition: all 0.4s ease;
     opacity: 0;
     transform: translateY(20px);
 }
 
+/* Keep photo credit at the bottom */
+.photo-credit {
+    position: absolute;
+    bottom: 10px; /* Slightly increased from 5px for better spacing */
+    left: 20px;
+    font-size: 0.8rem;
+    opacity: 0.8;
+    transition: all 0.4s ease;
+}
+
+/* Ensure proper stacking when both elements appear */
 .slide.active .location-badge {
     opacity: 1;
     transform: translateY(0);
+}
+
+.slide.active .photo-credit {
+    opacity: 0.8;
+    /* Add delay to make sure it appears after location badge */
+    transition-delay: 0.2s;
 }
 
 .slide-caption {
