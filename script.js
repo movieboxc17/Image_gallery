@@ -56,12 +56,16 @@ const imageMetadata = [
     { location: "Åre", caption: "", coords: "" },
     { location: "USA, minnesota", caption: "", coords: "" },
     { location: "USA, minnesota", caption: "", coords: "" },
+    { location: "USA, minnesota", caption: "", coords: "" },
     { location: "Alsike", caption: "", coords: "" },
+    { location: "USA, minnesota", caption: "", coords: "" },
     { location: "USA, minnesota", caption: "", coords: "" },
     { location: "Uppsala", caption: "", coords: "" },
     { location: "Alsike", caption: "", coords: "" },
-    { location: "Kreta", caption: "", coords: "" },
-    { location: "Kreta", caption: "", coords: "" }
+    { location: "Alsike", caption: "", coords: "" },
+    { location: "Kreat", caption: "", coords: "" },
+    { location: "Kreat", caption: "", coords: "" },
+    { location: "Kreat", caption: "", coords: "" }
 ];
 
 // Weather update function
@@ -248,6 +252,7 @@ document.addEventListener('DOMContentLoaded', function() {
     initSlideshow();
     updateActiveState();
     updateBackgroundGradient();
+    detectImageOrientation(); // Add this line
     
     setInterval(nextSlide, 8000);
     setInterval(updateWeather, 1800000);
@@ -272,3 +277,36 @@ document.addEventListener('DOMContentLoaded', function() {
         });
     }, 1000); // Wait for initial load
 });
+
+// Detect image orientation and apply appropriate classes
+function detectImageOrientation() {
+    const slideImages = document.querySelectorAll('.slide img');
+    
+    slideImages.forEach(img => {
+        // Wrap image in container if not already
+        if (!img.parentElement.classList.contains('slide-image-container')) {
+            const container = document.createElement('div');
+            container.className = 'slide-image-container';
+            img.parentNode.insertBefore(container, img);
+            container.appendChild(img);
+        }
+        
+        // Check orientation once image is loaded
+        if (img.complete) {
+            checkOrientation(img);
+        } else {
+            img.onload = function() {
+                checkOrientation(img);
+            };
+        }
+    });
+    
+    function checkOrientation(img) {
+        // If image is taller than it is wide
+        if (img.naturalHeight > img.naturalWidth) {
+            img.closest('.slide').classList.add('portrait');
+        } else {
+            img.closest('.slide').classList.remove('portrait');
+        }
+    }
+}
