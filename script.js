@@ -60,8 +60,8 @@ const imageMetadata = [
     { location: "USA, minnesota", caption: "", coords: "" },
     { location: "Uppsala", caption: "", coords: "" },
     { location: "Alsike", caption: "", coords: "" },
-    { location: "Kreat", caption: "", coords: "" },
-    { location: "Kreat", caption: "", coords: "" }
+    { location: "Kreta", caption: "", coords: "" },
+    { location: "Kreta", caption: "", coords: "" }
 ];
 
 // Weather update function
