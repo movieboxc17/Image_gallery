@@ -63,9 +63,9 @@ const imageMetadata = [
     { location: "Uppsala", caption: "", coords: "" },
     { location: "Alsike", caption: "", coords: "" },
     { location: "Alsike", caption: "", coords: "" },
-    { location: "Kreat", caption: "", coords: "" },
-    { location: "Kreat", caption: "", coords: "" },
-    { location: "Kreat", caption: "", coords: "" }
+    { location: "Grekland, Kreta", caption: "", coords: "" },
+    { location: "Grekland, Kreta", caption: "", coords: "" },
+    { location: "Grekland, Kreta", caption: "", coords: "" }
 ];
 
 // Weather update function
