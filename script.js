@@ -63,9 +63,9 @@ const imageMetadata = [
     { location: "Uppsala", caption: "", coords: "" },
     { location: "Alsike", caption: "", coords: "" },
     { location: "Alsike", caption: "", coords: "" },
-    { location: "Grekland, Kreta", caption: "", coords: "" },
-    { location: "Grekland, Kreta", caption: "", coords: "" },
-    { location: "Grekland, Kreta", caption: "", coords: "" }
+    { location: "Kreat", caption: "", coords: "" },
+    { location: "Kreat", caption: "", coords: "" },
+    { location: "Kreat", caption: "", coords: "" }
 ];
 
 // Weather update function
@@ -101,6 +101,28 @@ async function updateWeather() {
         console.log('Weather update failed, retrying in 5 minutes');
         setTimeout(updateWeather, 300000); // Retry after 5 minutes
     }
+}
+
+// Function to handle image loading errors
+function handleImageErrors() {
+    const images = document.querySelectorAll('.slide img');
+    
+    images.forEach(img => {
+        img.onerror = function() {
+            // If image fails to load, set a fallback
+            console.log('Image failed to load:', this.src);
+            this.src = 'https://i.ibb.co/Z8pPgBq/error-placeholder.jpg'; // Use your own fallback image
+            this.alt = 'Image could not be loaded';
+            
+            // Add error class to parent slide
+            this.closest('.slide').classList.add('image-error');
+        };
+        
+        // Verify existing images
+        if (img.complete && img.naturalHeight === 0) {
+            img.onerror();
+        }
+    });
 }
 
 // Enhanced slideshow with animations
@@ -246,38 +268,6 @@ const handleSwipe = () => {
     }
 };
 
-// Initialize and set intervals
-document.addEventListener('DOMContentLoaded', function() {
-    updateWeather();
-    initSlideshow();
-    updateActiveState();
-    updateBackgroundGradient();
-    detectImageOrientation(); // Add this line
-    
-    setInterval(nextSlide, 8000);
-    setInterval(updateWeather, 1800000);
-
-    // Enhance image quality after loading
-    setTimeout(() => {
-        document.querySelectorAll('.slide img').forEach(img => {
-            // Load higher quality version of the same image
-            const src = img.src;
-            img.style.transition = 'filter 0.5s ease';
-            img.style.filter = 'blur(5px)';
-            
-            // Create a new high-res image
-            const highResImg = new Image();
-            // If you have different URLs for high-res versions, use those instead
-            highResImg.src = src;
-            
-            highResImg.onload = function() {
-                img.src = highResImg.src;
-                img.style.filter = 'blur(0)';
-            };
-        });
-    }, 1000); // Wait for initial load
-});
-
 // Detect image orientation and apply appropriate classes
 function detectImageOrientation() {
     const slideImages = document.querySelectorAll('.slide img');
@@ -310,3 +300,57 @@ function detectImageOrientation() {
         }
     }
 }
+
+// Initialize and set intervals
+document.addEventListener('DOMContentLoaded', function() {
+    updateWeather();
+    initSlideshow();
+    updateActiveState();
+    updateBackgroundGradient();
+    detectImageOrientation();
+    handleImageErrors(); // Add this new line
+    
+    setInterval(nextSlide, 8000);
+    setInterval(updateWeather, 1800000);
+
+    // Enhance image quality after loading
+    setTimeout(() => {
+        const images = document.querySelectorAll('.slide img');
+        let loadedCount = 0;
+        const totalImages = images.length;
+        
+        images.forEach(img => {
+            // Load higher quality version of the same image
+            const src = img.src;
+            img.style.transition = 'filter 0.5s ease';
+            img.style.filter = 'blur(5px)';
+            
+            // Create a new high-res image
+            const highResImg = new Image();
+            // If you have different URLs for high-res versions, use those instead
+            highResImg.src = src;
+            
+            highResImg.onload = function() {
+                img.src = highResImg.src;
+                img.style.filter = 'blur(0)';
+                loadedCount++;
+                
+                // When all images are enhanced, hide the loading overlay
+                if (loadedCount === totalImages) {
+                    const loadingOverlay = document.querySelector('.loading-overlay');
+                    if (loadingOverlay) {
+                        loadingOverlay.style.opacity = 0;
+                        setTimeout(() => {
+                            loadingOverlay.style.display = 'none';
+                        }, 1000);
+                    }
+                }
+            };
+            
+            highResImg.onerror = function() {
+                loadedCount++;
+                img.style.filter = 'blur(0)';
+            };
+        });
+    }, 1000); // Wait for initial load
+});
