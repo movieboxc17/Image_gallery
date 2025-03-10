@@ -79,6 +79,7 @@ body {
     width: 100%;
     padding: 10px;
 }
+
 /* Slideshow container - made bigger */
 .slideshow-container {
     position: relative;
@@ -98,7 +99,9 @@ body {
     transform-style: preserve-3d;
     will-change: transform;
     backface-visibility: hidden;
+    transform: translateZ(0); /* Force GPU acceleration */
 }
+
 .slideshow-container:hover {
     transform: translateY(-5px);
 }
@@ -114,27 +117,6 @@ body {
 
 body {
     padding-bottom: 100px; /* Increased from 80px to give more space at bottom */
-}
-
-/* Adjusting for larger container in responsive design */
-@media (max-width: 1200px) {
-    .slideshow-container {
-        max-height: 75vh;
-    }
-}
-
-@media (max-width: 768px) {
-    .slideshow-container {
-        aspect-ratio: 16/10; /* Slightly taller on medium screens */
-        max-height: 70vh;
-    }
-}
-
-@media (max-width: 480px) {
-    .slideshow-container {
-        aspect-ratio: 4/3; /* More square on mobile */
-        max-height: 65vh;
-    }
 }
 
 .slide {
@@ -158,6 +140,7 @@ body {
     display: flex;
     align-items: center;
     justify-content: center;
+    position: relative;
 }
 
 /* Update image styling */
@@ -166,7 +149,8 @@ body {
     max-height: 100%;
     border-radius: 15px;
     object-fit: contain;
-    transition: transform 0.6s ease;
+    transition: transform 0.6s ease, filter 0.5s ease;
+    will-change: transform;
 }
 
 /* Special handling for portrait/vertical images - increased width */
@@ -184,6 +168,7 @@ body {
 .slide img:not(.zoomed):hover {
     cursor: zoom-in;
 }
+
 /* Navigation elements */
 .nav-arrow {
     position: absolute;
@@ -361,6 +346,11 @@ body {
     padding: 10px; /* Increased from 8px */
     box-shadow: 0 8px 20px rgba(0, 0, 0, 0.3),
                 0 0 15px rgba(229, 46, 113, 0.2);
+    transition: transform 0.5s ease;
+}
+
+.instagram-section img:hover {
+    transform: rotate(5deg) scale(1.05);
 }
 
 .instagram-section p {
@@ -382,9 +372,14 @@ body {
     transition: all 0.3s ease;
     box-shadow: 0 5px 15px rgba(0, 0, 0, 0.2);
 }
+
 .social-button:hover {
     transform: translateY(-3px);
     box-shadow: 0 7px 20px rgba(0, 0, 0, 0.3);
+}
+
+.social-button:active {
+    transform: scale(0.98);
 }
 
 .social-button i {
@@ -542,21 +537,40 @@ button:active, .nav-arrow:active, .progress-dot:active, .social-button:active {
     filter: brightness(1.1);
 }
 
-/* Instagram QR code effects */
-.instagram-section img {
-    transition: transform 0.5s ease;
-}
-
-.instagram-section img:hover {
-    transform: rotate(5deg) scale(1.05);
-}
-
 /* Page load animation */
 .content-wrapper, footer {
     animation: fadeIn 1s ease-out;
 }
 
-/* Responsive design */
+/* Error style for failed images */
+.slide.image-error {
+    background-color: rgba(255, 0, 0, 0.1);
+}
+
+.slide.image-error img {
+    opacity: 0.7;
+    border: 1px dashed rgba(255, 255, 255, 0.3);
+}
+
+/* Fix for Instagram section on different aspect ratios */
+@supports (aspect-ratio: 16/9) {
+    .instagram-section {
+        position: fixed;
+        bottom: 90px;
+        right: 20px;
+        z-index: 900;
+        max-height: calc(100vh - 200px);
+        overflow: auto;
+    }
+}
+
+/* Responsive design - original media queries */
+@media (max-width: 1200px) {
+    .slideshow-container {
+        max-height: 75vh;
+    }
+}
+
 @media (max-width: 768px) {
     .weather-bar {
         padding: 8px 10px;
@@ -577,6 +591,8 @@ button:active, .nav-arrow:active, .progress-dot:active, .social-button:active {
     }
     
     .slideshow-container {
+        aspect-ratio: 16/10; /* Slightly taller on medium screens */
+        max-height: 70vh;
         padding: 10px;
     }
     
@@ -710,5 +726,394 @@ button:active, .nav-arrow:active, .progress-dot:active, .social-button:active {
     
     footer p {
         font-size: 0.8rem;
+    }
+}
+
+/* New media queries for large screens and TVs */
+@media (min-width: 1920px) {
+    .slideshow-container {
+        max-width: 80vw;
+        height: 80vh;
+    }
+    
+    .weather-bar {
+        padding: 15px 40px;
+    }
+    
+    .current-weather span, .forecast-day {
+        font-size: 1.2rem;
+    }
+    
+    .location-badge {
+        font-size: 1.3rem;
+        padding: 12px 22px;
+    }
+    
+    .slide-caption {
+        max-width: 400px;
+    }
+    
+    .slide-caption p {
+        font-size: 1.2rem;
+    }
+    
+    .instagram-section {
+        width: 320px;
+        padding: 30px;
+        bottom: 120px;
+    }
+    
+    .instagram-section h2 {
+        font-size: 1.8rem;
+    }
+    
+    .instagram-section img {
+        width: 220px;
+        height: 220px;
+    }
+    
+    .social-button {
+        font-size: 1.3rem;
+        padding: 12px 24px;
+    }
+}
+
+/* For TV screens and ultra-wide displays */
+@media (min-width: 2560px) {
+    body {
+        padding: 40px;
+        padding-bottom: 120px;
+    }
+    
+    .slideshow-container {
+        max-width: 70vw;
+        height: 75vh;
+        padding: 25px;
+    }
+    
+    .weather-bar {
+        padding: 20px 60px;
+    }
+    
+    .current-weather span, .forecast-day {
+        font-size: 1.5rem;
+    }
+    
+    .nav-arrow {
+        width: 70px;
+        height: 70px;
+    }
+    
+    .nav-arrow i {
+        font-size: 2rem;
+    }
+    
+    .progress-dot {
+        width: 15px;
+        height: 15px;
+    }
+    
+    .instagram-section {
+        width: 380px;
+        padding: 35px;
+        bottom: 150px;
+        right: 40px;
+    }
+    
+    .instagram-section h2 {
+        font-size: 2.2rem;
+    }
+    
+    .instagram-section img {
+        width: 260px;
+        height: 260px;
+    }
+    
+    .instagram-section p {
+        font-size: 1.6rem;
+    }
+    
+    .social-button {
+        font-size: 1.6rem;
+        padding: 15px 30px;
+    }
+    
+    footer {
+        padding: 15px 0;
+    }
+    
+    footer p {
+        font-size: 1.2rem;
+    }
+}
+
+/* Fix for portrait images on large screens */
+@media (min-width: 1600px) {
+    .slide.portrait img {
+        max-height: 90%;
+        max-width: 60%;
+    }
+}
+
+/* Special TV mode for smart TVs */
+@media (min-width: 3840px) {
+    .slideshow-container {
+        max-width: 65vw;
+        height: 70vh;
+    }
+    
+    .nav-arrow {
+        width: 100px;
+        height: 100px;
+    }
+    
+    .nav-arrow i {
+        font-size: 3rem;
+    }
+    
+    .progress-dot {
+        width: 20px;
+        height: 20px;
+        margin: 0 5px;
+    }
+    
+    .current-weather span, .forecast-day {
+        font-size: 2rem;
+    }
+    
+    .location-badge {
+        font-size: 2rem;
+        padding: 15px 30px;
+        border-radius: 30px;
+    }
+    
+    .instagram-section {
+        width: 500px;
+        padding: 40px;
+    }
+    
+    .instagram-section h2 {
+        font-size: 3rem;
+    }
+    
+    .instagram-section img {
+        width: 360px;
+        height: 360px;
+        padding: 15px;
+    }
+    
+    .instagram-section p {
+        font-size: 2.4rem;
+    }
+    
+    .social-button {
+        font-size: 2.2rem;
+        padding: 20px 40px;
+        border-radius: 40px;
+    }
+    
+    footer p {
+        font-size: 1.6rem;
+    }
+    
+    .slide-caption {
+        max-width: 600px;
+        padding: 25px;
+        border-radius: 20px;
+    }
+    
+    .slide-caption p {
+        font-size: 1.8rem;
+    }
+    
+    .slide-caption small {
+        font-size: 1.2rem;
+    }
+    
+    .photo-credit {
+        font-size: 1.2rem;
+    }
+}
+
+/* Special handling for ultra-wide screens to maintain proper aspect ratio */
+@media (min-width: 2560px) and (max-aspect-ratio: 21/9) {
+    .slideshow-container {
+        max-width: 75vw;
+        max-height: 70vh;
+    }
+}
+
+/* Browser-specific fixes */
+.is-ie-edge .slideshow-container {
+    transform: none !important;
+}
+
+.is-safari .slideshow-container {
+    will-change: auto;
+}
+
+.is-tv .nav-arrow,
+.is-tv .progress-dot,
+.is-tv .social-button {
+    transition: transform 0.4s ease-out;
+}
+
+.is-tv .slideshow-container {
+    box-shadow: 0 30px 60px rgba(0, 0, 0, 0.7);
+}
+
+/* Fixes for image loading and error states */
+img[src=""] {
+    opacity: 0;
+}
+
+.slide img[src=""],
+.slide img:not([src]) {
+    display: none;
+}
+
+/* Better loading animation for slow networks */
+@keyframes pulse-loading {
+    0% { opacity: 0.3; }
+    50% { opacity: 0.7; }
+    100% { opacity: 0.3; }
+}
+
+.slide:not(.active) img {
+    opacity: 0;
+}
+
+.slide.loading img {
+    animation: pulse-loading 1.5s ease-in-out infinite;
+}
+
+/* Make all form factors properly handle orientation changes */
+@media (orientation: portrait) {
+    .slideshow-container {
+        height: 70vh;
+        max-width: 95vw;
+    }
+    
+    .instagram-section {
+        bottom: 100px;
+    }
+}
+
+@media (orientation: landscape) and (max-height: 600px) {
+    .slideshow-container {
+        height: 65vh;
+    }
+    
+    .weather-bar {
+        padding: 5px 15px;
+    }
+    
+    .instagram-section {
+        transform: scale(0.8);
+        transform-origin: bottom right;
+        bottom: 70px;
+    }
+}
+
+/* Print styles in case someone wants to print the page */
+@media print {
+    .slideshow-container {
+        height: auto;
+        box-shadow: none;
+    }
+    
+    .slide {
+        display: block;
+        page-break-inside: avoid;
+        opacity: 1;
+        position: relative;
+        height: auto;
+        margin-bottom: 20px;
+    }
+    
+    .instagram-section,
+    .nav-arrow,
+    .progress-container,
+    .weather-bar {
+        display: none;
+    }
+    
+    body {
+        background: white;
+        color: black;
+    }
+    
+    .location-badge {
+        color: black;
+        background: #f0f0f0;
+        opacity: 1;
+        transform: none;
+    }
+    
+    .slide-caption {
+        color: black;
+        background: #f0f0f0;
+        opacity: 1;
+        transform: none;
+    }
+}
+
+/* High contrast mode for accessibility */
+@media (prefers-contrast: high) {
+    .slideshow-container {
+        background: black;
+    }
+    
+    .location-badge,
+    .weather-bar,
+    footer {
+        background: black;
+        border: 2px solid white;
+    }
+    
+    .forecast-day {
+        background: black;
+        border: 1px solid white;
+    }
+    
+    .nav-arrow {
+        background: black;
+        border: 2px solid white;
+    }
+    
+    .progress-dot {
+        background: black;
+        border: 1px solid white;
+    }
+    
+    .progress-dot.active {
+        background: white;
+    }
+}
+
+/* Reduced motion preference for accessibility */
+@media (prefers-reduced-motion: reduce) {
+    * {
+        animation: none !important;
+        transition: none !important;
+    }
+    
+    .instagram-section {
+        animation: none !important;
+    }
+    
+    .slide.active img {
+        animation: none !important;
+    }
+}
+
+/* Fix for Firefox specific issues */
+@-moz-document url-prefix() {
+    .slideshow-container {
+        backface-visibility: initial;
+    }
+    
+    .slide img {
+        image-rendering: -webkit-optimize-contrast;
     }
 }
