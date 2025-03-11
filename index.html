@@ -1,165 +1,178 @@
 <!DOCTYPE html>
-<html lang="sv">
+<html lang="en">
 <head>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <meta name="description" content="Professional Photography Gallery">
-    <meta http-equiv="X-UA-Compatible" content="IE=edge">
-    <meta name="apple-mobile-web-app-capable" content="yes">
-    <meta name="mobile-web-app-capable" content="yes">
-    <meta name="theme-color" content="#000000">
-    <title>ThePhotographers Gallery</title>
+    <title>Gallery Slideshow</title>
     <link rel="stylesheet" href="styles.css">
     <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.0.0-beta3/css/all.min.css">
-    <link href="https://fonts.googleapis.com/css2?family=Grand+Hotel&family=Roboto:wght@400;500;700&display=swap" rel="stylesheet">
+    <link rel="preconnect" href="https://fonts.googleapis.com">
+    <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+    <link href="https://fonts.googleapis.com/css2?family=Montserrat:wght@400;500;600&display=swap" rel="stylesheet">
 </head>
 <body>
-    <div class="weather-bar">
-        <div class="current-weather">
-            <i class="fas fa-map-marker-alt"></i>
-            <span>Alsike, Sweden</span>
-            <span id="current-temp"></span>
+    <!-- Loading Screen -->
+    <div id="loading-screen">
+        <img src="logo.png" alt="Logo" class="loading-logo">
+        <div class="loading-collaboration">Gallery Slideshow</div>
+        <div class="loading-progress">
+            <div class="loading-progress-bar"></div>
         </div>
-        <div class="forecast-container">
-            <div class="forecast-day" id="day1">
-                <span class="day-name"></span>
-                <span class="temp"></span>
-            </div>
-            <div class="forecast-day" id="day2">
-                <span class="day-name"></span>
-                <span class="temp"></span>
-            </div>
-            <div class="forecast-day" id="day3">
-                <span class="day-name"></span>
-                <span class="temp"></span>
-            </div>
-        </div>
+        <div class="loading-text">Loading images...</div>
     </div>
-
-    <div class="main-container">
-        <div class="content-wrapper">
-            <div class="slideshow-container">
-                <div class="slide active"><img loading="lazy" src="https://i.ibb.co/fSKdDt0/F-r-06.jpg" alt="Alsike Får1"></div>
-                <div class="slide"><img loading="lazy" src="https://i.ibb.co/q7561nw/F-r-03.jpg" alt="Alsike Får2"></div>
-                <div class="slide"><img loading="lazy" src="https://i.ibb.co/q7561nw/F-r-03.jpg" alt="Alsike Får3"></div>
-                <div class="slide"><img loading="lazy" src="https://i.ibb.co/7g4WKxh/F-r-05.jpg" alt="Alsike Får4"></div>
-                <div class="slide"><img loading="lazy" src="https://i.ibb.co/w4M9RrC/F-r-07.jpg" alt="Alsike Får5"></div>
-                <div class="slide"><img loading="lazy" src="https://i.ibb.co/9GxVrmy/F-r-02.jpg" alt="Alsike Får6"></div>
-                <div class="slide"><img loading="lazy" src="https://i.ibb.co/r5fXL1j/F-r-08.jpg" alt="Alsike Får7"></div>
-                <div class="slide"><img loading="lazy" src="https://i.ibb.co/2W1nMmb/F-r-09.jpg" alt="Alsike Får8"></div>
-                <div class="slide"><img loading="lazy" src="https://i.ibb.co/tXRyTdz/Brun-H-st-2.jpg" alt="Alsike Häst1"></div>
-                <div class="slide"><img loading="lazy" src="https://i.ibb.co/bBPs3KL/Snapseed-nef.jpg" alt="Alsike Häst2"></div>
-                <div class="slide"><img loading="lazy" src="https://i.ibb.co/R4sT1g2/H-st-Krig-3.jpg" alt="Alsike Häst3"></div>
-                <div class="slide"><img loading="lazy" src="https://i.ibb.co/2ywnfZ7/H-st-Krig-5.jpg" alt="Alsike Häst4"></div>
-                <div class="slide"><img loading="lazy" src="https://i.ibb.co/pRcpjKk/Snapseed-nef.jpg" alt=""></div>
-                <div class="slide"><img loading="lazy" src="https://i.ibb.co/Vvmy7HD/Snapseed-nef-2.jpg" alt=""></div>
-                <div class="slide"><img loading="lazy" src="https://i.ibb.co/djZGrZr/Snapseed-nef-3.jpg" alt=""></div>
-                <div class="slide"><img loading="lazy" src="https://i.ibb.co/tsTFQ27/St-vel-01.jpg" alt=""></div>
-                <div class="slide"><img loading="lazy" src="https://i.ibb.co/4gFYtKJ/IMG-0373.jpg" alt=""></div>
-                <div class="slide"><img loading="lazy" src="https://i.ibb.co/XVwBtBN/IMG-0705-1.jpg" alt=""></div>
-                <div class="slide"><img loading="lazy" src="https://i.ibb.co/7NCc9xX/IMG-0674.jpg" alt=""></div>
-                <div class="slide"><img loading="lazy" src="https://i.ibb.co/gwcZmyr/Attachment-1-1.jpg" alt=""></div>
-                <div class="slide"><img loading="lazy" src="https://i.ibb.co/TLFh5py/bild-1.jpg" alt=""></div>
-                <div class="slide"><img loading="lazy" src="https://i.ibb.co/Y09npZ3/IMG-1111.jpg" alt="USA Water1"></div>
-                <div class="slide"><img loading="lazy" src="https://i.ibb.co/vqHhsH6/Snapseed.jpg" alt="USA Water2"></div>
-                <div class="slide"><img loading="lazy" src="https://i.ibb.co/0Rqs5pKM/IMG-3903.jpg" alt="USA Clock"></div>
-                <div class="slide"><img loading="lazy" src="https://i.ibb.co/bzfsV6D/Elsk-p-01.jpg" alt="Alsike El"></div>
-                <div class="slide"><img loading="lazy" src="https://i.ibb.co/p1kNp9M/Snapseed.jpg" alt="USA Gold"></div>
-                <div class="slide"><img loading="lazy" src="https://i.ibb.co/TMBkYj5N/IMG-0734.jpg" alt="USa Gold 2"></div> 
-                <div class="slide"><img loading="lazy" src="https://i.ibb.co/hZXcWxr/IMG-0773.jpg" alt="Uppsala"></div>
-                <div class="slide"><img loading="lazy" src="https://i.ibb.co/qpbVRTQ/Attachment-1.jpg" alt="Alsike, Skola"></div>
-                <div class="slide"><img loading="lazy" src="https://i.ibb.co/qYjx9sVK/Snapseed.jpg" alt="Alsike, Skola logo"></div>
-                <div class="slide"><img loading="lazy" src="https://i.ibb.co/932KWDz6/IMG-1083.jpg" alt="Kreata Bil"></div>
-                <div class="slide"><img loading="lazy" src="https://i.ibb.co/wh2yxj34/IMG-6088.jpg" alt="Kreta Hav"></div>
-                <div class="slide"><img loading="lazy" src="https://i.ibb.co/x8d4T90K/Full-Size-Render.jpg" alt="Kreta Hav2"></div>
-            </div>
+    
+    <!-- Gallery Container -->
+    <div class="gallery-container">
+        <!-- Slides with your provided images -->
+        <div class="slide active">
+            <img loading="lazy" src="https://i.ibb.co/fSKdDt0/F-r-06.jpg" alt="Alsike Får1">
+        </div>
+        
+        <div class="slide">
+            <img loading="lazy" src="https://i.ibb.co/q7561nw/F-r-03.jpg" alt="Alsike Får2">
+        </div>
+        
+        <div class="slide">
+            <img loading="lazy" src="https://i.ibb.co/q7561nw/F-r-03.jpg" alt="Alsike Får3">
+        </div>
+        
+        <div class="slide">
+            <img loading="lazy" src="https://i.ibb.co/7g4WKxh/F-r-05.jpg" alt="Alsike Får4">
+        </div>
+        
+        <div class="slide">
+            <img loading="lazy" src="https://i.ibb.co/w4M9RrC/F-r-07.jpg" alt="Alsike Får5">
+        </div>
+        
+        <div class="slide">
+            <img loading="lazy" src="https://i.ibb.co/9GxVrmy/F-r-02.jpg" alt="Alsike Får6">
+        </div>
+        
+        <div class="slide">
+            <img loading="lazy" src="https://i.ibb.co/r5fXL1j/F-r-08.jpg" alt="Alsike Får7">
+        </div>
+        
+        <div class="slide">
+            <img loading="lazy" src="https://i.ibb.co/2W1nMmb/F-r-09.jpg" alt="Alsike Får8">
+        </div>
+        
+        <div class="slide">
+            <img loading="lazy" src="https://i.ibb.co/tXRyTdz/Brun-H-st-2.jpg" alt="Alsike Häst1">
+        </div>
+        
+        <div class="slide">
+            <img loading="lazy" src="https://i.ibb.co/bBPs3KL/Snapseed-nef.jpg" alt="Alsike Häst2">
+        </div>
+        
+        <div class="slide">
+            <img loading="lazy" src="https://i.ibb.co/R4sT1g2/H-st-Krig-3.jpg" alt="Alsike Häst3">
+        </div>
+        
+        <div class="slide">
+            <img loading="lazy" src="https://i.ibb.co/2ywnfZ7/H-st-Krig-5.jpg" alt="Alsike Häst4">
+        </div>
+        
+        <div class="slide">
+            <img loading="lazy" src="https://i.ibb.co/pRcpjKk/Snapseed-nef.jpg" alt="">
+        </div>
+        
+        <div class="slide">
+            <img loading="lazy" src="https://i.ibb.co/Vvmy7HD/Snapseed-nef-2.jpg" alt="">
+        </div>
+        
+        <div class="slide">
+            <img loading="lazy" src="https://i.ibb.co/djZGrZr/Snapseed-nef-3.jpg" alt="">
+        </div>
+        
+        <div class="slide">
+            <img loading="lazy" src="https://i.ibb.co/tsTFQ27/St-vel-01.jpg" alt="">
+        </div>
+        
+        <div class="slide">
+            <img loading="lazy" src="https://i.ibb.co/4gFYtKJ/IMG-0373.jpg" alt="">
+        </div>
+        
+        <div class="slide">
+            <img loading="lazy" src="https://i.ibb.co/XVwBtBN/IMG-0705-1.jpg" alt="">
+        </div>
+        
+        <div class="slide">
+            <img loading="lazy" src="https://i.ibb.co/7NCc9xX/IMG-0674.jpg" alt="">
+        </div>
+        
+        <div class="slide">
+            <img loading="lazy" src="https://i.ibb.co/gwcZmyr/Attachment-1-1.jpg" alt="">
+        </div>
+        
+        <div class="slide">
+            <img loading="lazy" src="https://i.ibb.co/TLFh5py/bild-1.jpg" alt="">
+        </div>
+        
+        <div class="slide">
+            <img loading="lazy" src="https://i.ibb.co/Y09npZ3/IMG-1111.jpg" alt="USA Water1">
+        </div>
+        
+        <div class="slide">
+            <img loading="lazy" src="https://i.ibb.co/vqHhsH6/Snapseed.jpg" alt="USA Water2">
+        </div>
+        
+        <div class="slide">
+            <img loading="lazy" src="https://i.ibb.co/0Rqs5pK/IMG-3903.jpg" alt="USA Clock">
+        </div>
+        
+        <div class="slide">
+            <img loading="lazy" src="https://i.ibb.co/bzfsV6D/Elsk-p-01.jpg" alt="Alsike El">
+        </div>
+        
+        <div class="slide">
+            <img loading="lazy" src="https://i.ibb.co/p1kNp9M/Snapseed.jpg" alt="USA Gold">
+        </div>
+        
+        <div class="slide">
+            <img loading="lazy" src="https://i.ibb.co/TMBkYj5/IMG-0734.jpg" alt="USA Gold 2">
+        </div>
+        
+        <div class="slide">
+            <img loading="lazy" src="https://i.ibb.co/hZXcWxr/IMG-0773.jpg" alt="Uppsala">
+        </div>
+        
+        <div class="slide">
+            <img loading="lazy" src="https://i.ibb.co/qpbVRTQ/Attachment-1.jpg" alt="Alsike, Skola">
+        </div>
+        
+        <div class="slide">
+            <img loading="lazy" src="https://i.ibb.co/qYjx9sV/Snapseed.jpg" alt="Alsike, Skola logo">
+        </div>
+        
+        <div class="slide">
+            <img loading="lazy" src="https://i.ibb.co/932KWDz/IMG-1083.jpg" alt="Kreta Bil">
+        </div>
+        
+        <div class="slide">
+            <img loading="lazy" src="https://i.ibb.co/wh2yxj3/IMG-6088.jpg" alt="Kreta Hav">
+        </div>
+        
+        <div class="slide">
+            <img loading="lazy" src="https://i.ibb.co/x8d4T90/Full-Size-Render.jpg" alt="Kreta Hav2">
+        </div>
+        
+        <!-- Progress Bar -->
+        <div class="progress-container">
+            <div class="progress-bar"></div>
+        </div>
+        
+        <!-- Slide Counter -->
+        <div class="slide-counter">
+            <span id="current-slide">1</span>/<span id="total-slides">32</span>
         </div>
     </div>
     
-    <!-- Instagram section (now in bottom right corner) -->
-    <div class="instagram-section">
-        <h2>Please Follow Us!</h2>
-        <img src="https://i.ibb.co/nLBtPj6/IMG-1109.jpg" alt="Instagram QR Code">
-        <p>@the.photographers3</p>
-        <div class="social-links">
-            <a href="https://www.instagram.com/the.photographers3" target="_blank" class="social-button">
-                <i class="fab fa-instagram"></i> Follow
-            </a>
-        </div>
+    <!-- Footer -->
+    <div class="footer">
+        <div>Gallery Slideshow</div>
+        <div class="version">Version 1.3.6</div>
     </div>
-
-    <footer>
-        <div class="footer-content">
-            <div class="footer-section">
-                <p>&copy; 2025 ThePhotographers. All Rights Reserved.</p>
-            </div>
-            <div class="footer-section">
-                <p>Photos by <a href="https://www.instagram.com/the.photographers3" target="_blank">Askansz & Moviebox C17</a></p>
-            </div>
-            <div class="footer-section">
-                <p>V 2.5 Beta</p>
-            </div>
-        </div>
-    </footer>
-
-    <!-- Loading Overlay -->
-    <div class="loading-overlay">
-        <div class="loading-spinner"></div>
-    </div>
-
-    <script>
-        // Hide loading overlay when page is fully loaded
-        window.addEventListener('load', function() {
-            const loadingOverlay = document.querySelector('.loading-overlay');
-            loadingOverlay.style.opacity = 0;
-            setTimeout(() => {
-                loadingOverlay.style.display = 'none';
-            }, 1000);
-        });
-        
-        // Fix for older browsers that don't support some features
-        if (!window.requestAnimationFrame) {
-            window.requestAnimationFrame = function(callback) {
-                return setTimeout(callback, 1000 / 60);
-            };
-        }
-        
-        // Polyfill for older browsers
-        if (!Element.prototype.closest) {
-            Element.prototype.closest = function(s) {
-                var el = this;
-                do {
-                    if (el.matches(s)) return el;
-                    el = el.parentElement || el.parentNode;
-                } while (el !== null && el.nodeType === 1);
-                return null;
-            };
-        }
-        
-        // Browser detection for special handling
-        function detectBrowser() {
-            const isIE = /*@cc_on!@*/false || !!document.documentMode;
-            const isEdge = !isIE && !!window.StyleMedia;
-            const isChrome = !!window.chrome;
-            const isSafari = /^((?!chrome|android).)*safari/i.test(navigator.userAgent);
-            const isSmartTV = /smart-tv|smarttv|googletv|appletv|hbbtv|pov_tv|netcast.tv/i.test(navigator.userAgent.toLowerCase());
-            
-            if (isIE || isEdge) {
-                document.body.classList.add('is-ie-edge');
-            }
-            
-            if (isSafari) {
-                document.body.classList.add('is-safari');
-            }
-            
-            if (isSmartTV) {
-                document.body.classList.add('is-tv');
-            }
-        }
-        
-        detectBrowser();
-    </script>
+    
     <script src="script.js"></script>
-    <script src="refresh.js"></script>
 </body>
 </html>
