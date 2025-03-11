@@ -1,1119 +1,308 @@
+/* Reset and base styles */
 * {
     margin: 0;
     padding: 0;
     box-sizing: border-box;
-    scroll-behavior: smooth;
-    font-family: 'Roboto', Arial, sans-serif;
 }
 
 body {
-    background: radial-gradient(circle at top, #121212, #000);
-    color: #f4f4f4;
-    min-height: 100vh;
-    padding: 20px;
-    padding-bottom: 80px; /* Add padding to prevent footer overlap */
-    transition: background 0.5s ease-in-out;
-    overflow-x: hidden;
+    font-family: 'Arial', sans-serif;
+    background-color: #000;
+    color: #fff;
+    overflow: hidden;
 }
 
-/* Header and Weather Bar */
-.weather-bar {
+/* Gallery container */
+.gallery-container {
+    position: relative;
+    width: 100%;
+    height: 100vh;
+    overflow: hidden;
+    background-color: #000;
+}
+
+/* Slides styling */
+.slide {
+    position: absolute;
+    top: 0;
+    left: 0;
+    width: 100%;
+    height: 100%;
+    opacity: 0;
+    transition: opacity 1.2s ease-in-out;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+}
+
+.slide.active {
+    opacity: 1;
+    z-index: 1;
+}
+
+.slide img {
+    max-width: 100%;
+    max-height: 100%;
+    object-fit: contain;
+}
+
+/* Image overlay container */
+.image-overlay {
+    position: absolute;
+    bottom: 0;
+    left: 0;
+    right: 0;
+    padding: 20px;
+    z-index: 5;
+    pointer-events: none;
+}
+
+/* Location marker */
+.location-marker {
+    position: absolute;
+    bottom: 25px;
+    left: 25px;
+    display: flex;
+    align-items: center;
+    font-size: 16px;
+    padding: 6px 12px;
+    color: #ffffff;
+    background: rgba(0, 0, 0, 0.6);
+    border-radius: 30px;
+    box-shadow: 0 2px 10px rgba(0, 0, 0, 0.2);
+    backdrop-filter: blur(5px);
+    transition: all 0.3s ease;
+}
+
+.location-marker i {
+    margin-right: 8px;
+}
+
+/* Copyright text */
+.copyright-text {
+    position: absolute;
+    bottom: 25px;
+    right: 25px;
+    font-size: 16px;
+    padding: 6px 12px;
+    color: #ffffff;
+    background: rgba(0, 0, 0, 0.6);
+    border-radius: 30px;
+    box-shadow: 0 2px 10px rgba(0, 0, 0, 0.2);
+    backdrop-filter: blur(5px);
+    transition: all 0.3s ease;
+}
+
+/* Progress bar */
+.progress-container {
+    position: absolute;
+    bottom: 0;
+    left: 0;
+    width: 100%;
+    height: 4px;
+    background: rgba(0, 0, 0, 0.5);
+    z-index: 10;
+}
+
+.progress-bar {
+    height: 100%;
+    width: 0;
+    background: #ffffff;
+    transition: width 0.1s linear;
+}
+
+/* Slide counter */
+.slide-counter {
+    position: absolute;
+    top: 20px;
+    right: 20px;
+    font-size: 16px;
+    color: #ffffff;
+    background: rgba(0, 0, 0, 0.6);
+    padding: 5px 10px;
+    border-radius: 30px;
+    z-index: 10;
+}
+
+/* Loading screen */
+#loading-screen {
     position: fixed;
     top: 0;
     left: 0;
     width: 100%;
-    background: linear-gradient(45deg, #ff8a00, #e52e71);
-    padding: 10px 20px;
+    height: 100%;
+    background-color: #000;
     display: flex;
-    justify-content: space-between;
+    flex-direction: column;
+    justify-content: center;
     align-items: center;
-    z-index: 1000;
-    box-shadow: 0 2px 10px rgba(0,0,0,0.2);
+    z-index: 9999;
+    transition: opacity 0.8s ease;
 }
 
-.current-weather {
-    display: flex;
-    align-items: center;
-    gap: 15px;
+.loading-logo {
+    max-width: 200px;
+    margin-bottom: 30px;
 }
 
-.current-weather span {
-    font-weight: 500;
-}
-
-.forecast-container {
-    display: flex;
-    gap: 20px;
-}
-
-.forecast-day {
-    display: flex;
-    align-items: center;
-    gap: 10px;
-    padding: 5px 10px;
-    border-radius: 20px;
-    background: rgba(255, 255, 255, 0.1);
-    transition: all 0.3s ease;
-}
-
-.forecast-day:hover {
-    background: rgba(255, 255, 255, 0.2);
-    transform: translateY(-2px);
-}
-
-.day-name, .temp {
-    color: white;
-    font-weight: 500;
-}
-
-/* Main container for layout */
-.main-container {
-    margin-top: 80px;
-    max-width: 1400px;
-    margin-left: auto;
-    margin-right: auto;
+.loading-collaboration {
+    color: #ffffff;
+    font-size: 16px;
     margin-bottom: 40px;
+    opacity: 0.8;
 }
 
-.content-wrapper {
-    width: 100%;
-    padding: 10px;
-}
-
-/* Slideshow container - made bigger */
-.slideshow-container {
-    position: relative;
-    width: 100%;
-    overflow: hidden;
-    border-radius: 20px;
-    box-shadow: 0 20px 40px rgba(0, 0, 0, 0.6);
-    background: rgba(0, 0, 0, 0.2);
-    padding: 15px;
-    backdrop-filter: blur(10px);
-    transition: transform 0.3s ease;
-    /* Increased height */
-    height: 85vh; /* Changed from 80vh to 85vh for more height */
-    margin: 0 auto;
-    max-width: 90vw; /* Wide container (90% of viewport width) */
-    min-width: 80vw; /* Ensures minimum width */
-    transform-style: preserve-3d;
-    will-change: transform;
-    backface-visibility: hidden;
-    transform: translateZ(0); /* Force GPU acceleration */
-}
-
-.slideshow-container:hover {
-    transform: translateY(-5px);
-}
-
-/* Update the main container to allow more space */
-.main-container {
-    margin-top: 80px;
-    max-width: 95%;
-    margin-left: auto;
-    margin-right: auto;
-    margin-bottom: 60px; /* Increased from 40px to accommodate taller slideshow */
-}
-
-body {
-    padding-bottom: 100px; /* Increased from 80px to give more space at bottom */
-}
-
-.slide {
-    display: none;
-    position: absolute;
-    width: 100%;
-    height: 100%;
-    transition: opacity 0.8s ease-in-out;
-    opacity: 0;
-}
-
-.slide.active {
-    display: block;
-    opacity: 1;
-}
-
-/* Add adaptive image container */
-.slide-image-container {
-    width: 100%;
-    height: 100%;
-    display: flex;
-    align-items: center;
-    justify-content: center;
-    position: relative;
-}
-
-/* Update image styling */
-.slide img {
-    max-width: 100%;
-    max-height: 100%;
-    border-radius: 15px;
-    object-fit: contain;
-    transition: transform 0.6s ease, filter 0.5s ease;
-    will-change: transform;
-}
-
-/* Special handling for portrait/vertical images - increased width */
-.slide.portrait img {
-    max-height: 100%;
-    max-width: 80%; /* Increased from 65% to 80% for wider display */
-    margin: 0 auto;
-}
-
-.slide img.zoomed {
-    transform: scale(1.1);
-    cursor: zoom-out;
-}
-
-.slide img:not(.zoomed):hover {
-    cursor: zoom-in;
-}
-
-/* Navigation elements */
-.nav-arrow {
-    position: absolute;
-    top: 50%;
-    transform: translateY(-50%);
-    width: 50px;
-    height: 50px;
+.loading-progress {
+    width: 300px;
+    height: 4px;
     background: rgba(255, 255, 255, 0.2);
-    border-radius: 50%;
-    display: flex;
-    align-items: center;
-    justify-content: center;
-    cursor: pointer;
-    z-index: 10;
-    transition: all 0.3s ease;
-    backdrop-filter: blur(5px);
+    border-radius: 2px;
+    overflow: hidden;
+    margin-bottom: 20px;
 }
 
-.nav-arrow:hover {
-    background: rgba(255, 255, 255, 0.3);
-    transform: translateY(-50%) scale(1.1);
+.loading-progress-bar {
+    height: 100%;
+    width: 0;
+    background: #ffffff;
+    transition: width 0.3s ease;
 }
 
-.prev-arrow {
-    left: 20px;
+.loading-text {
+    color: #ffffff;
+    font-size: 14px;
+    opacity: 0.7;
 }
 
-.next-arrow {
-    right: 20px;
-}
-
-.nav-arrow i {
-    color: white;
-    font-size: 1.5rem;
-}
-
-/* Progress indicators */
-.progress-container {
+/* Footer styling */
+.footer {
     position: absolute;
     bottom: 20px;
     left: 50%;
     transform: translateX(-50%);
-    display: flex;
-    gap: 10px;
+    font-size: 12px;
+    color: rgba(255, 255, 255, 0.5);
     z-index: 10;
-}
-
-.progress-dot {
-    width: 10px;
-    height: 10px;
-    border-radius: 50%;
-    background: rgba(255, 255, 255, 0.3);
-    cursor: pointer;
-    transition: all 0.3s ease;
-}
-
-.progress-dot.active {
-    background: white;
-    transform: scale(1.2);
-}
-
-.progress-dot:hover {
-    background: rgba(255, 255, 255, 0.6);
-}
-
-/* Image captions and location badges */
-.location-badge {
-    position: absolute;
-    bottom: 40px; /* Increased from 20px to move it up */
-    left: 20px;
-    background: linear-gradient(45deg, #ff8a00, #e52e71);
-    color: white;
-    padding: 10px 18px;
-    border-radius: 20px;
-    font-weight: 500;
-    font-size: 1.1rem;
-    z-index: 5;
-    transition: all 0.4s ease;
-    opacity: 0;
-    transform: translateY(20px);
-}
-
-/* Keep photo credit at the bottom */
-.photo-credit {
-    position: absolute;
-    bottom: 10px; /* Slightly increased from 5px for better spacing */
-    left: 20px;
-    font-size: 0.8rem;
-    opacity: 0.8;
-    transition: all 0.4s ease;
-}
-
-/* Ensure proper stacking when both elements appear */
-.slide.active .location-badge {
-    opacity: 1;
-    transform: translateY(0);
-}
-
-.slide.active .photo-credit {
-    opacity: 0.8;
-    /* Add delay to make sure it appears after location badge */
-    transition-delay: 0.2s;
-}
-
-.slide-caption {
-    position: absolute;
-    top: 20px;
-    right: 20px;
-    max-width: 300px;
-    background: rgba(0, 0, 0, 0.6);
-    backdrop-filter: blur(10px);
-    padding: 15px;
-    border-radius: 15px;
-    transition: all 0.4s ease;
-    opacity: 0;
-    transform: translateX(20px);
-}
-
-.slide.active .slide-caption {
-    opacity: 1;
-    transform: translateX(0);
-}
-
-.slide-caption p {
-    font-size: 1rem;
-    margin-bottom: 8px;
-}
-
-.slide-caption small {
-    font-size: 0.8rem;
-    opacity: 0.8;
-}
-
-.photo-credit {
-    position: absolute;
-    bottom: 20px;
-    right: 20px;
-    font-size: 0.8rem;
-    opacity: 0.8;
-    transition: all 0.4s ease;
-}
-
-/* Instagram Section - now bigger for easier scanning */
-.instagram-section {
-    width: 280px; /* Increased from 220px */
-    background: linear-gradient(145deg, #ff8a00, #e52e71);
-    padding: 25px; /* Increased from 20px */
-    border-radius: 25px;
-    box-shadow: 0 10px 30px rgba(0, 0, 0, 0.5),
-                0 5px 15px rgba(229, 46, 113, 0.3),
-                0 0 30px rgba(255, 138, 0, 0.2);
-    text-align: center;
-    color: #fff;
-    backdrop-filter: blur(12px);
-    position: fixed;
-    bottom: 90px; /* Position above the footer */
-    right: 20px;
-    z-index: 900;
-    animation: float 6s ease-in-out infinite;
-}
-
-.instagram-section h2 {
-    font-size: 1.6rem; /* Increased from 1.4rem */
-    margin-bottom: 15px; /* Increased from 10px */
-    text-shadow: 2px 2px 4px rgba(0, 0, 0, 0.2);
-}
-
-.instagram-section img {
-    width: 180px; /* Increased from 120px */
-    height: 180px; /* Increased from 120px */
-    object-fit: contain;
-    margin: 15px auto; /* Increased from 10px */
-    border-radius: 15px; /* Increased from 12px */
-    background: white;
-    padding: 10px; /* Increased from 8px */
-    box-shadow: 0 8px 20px rgba(0, 0, 0, 0.3),
-                0 0 15px rgba(229, 46, 113, 0.2);
-    transition: transform 0.5s ease;
-}
-
-.instagram-section img:hover {
-    transform: rotate(5deg) scale(1.05);
-}
-
-.instagram-section p {
-    font-size: 1.2rem; /* Increased from 1rem */
-    font-weight: 500;
-    margin-top: 15px; /* Increased from 10px */
-    margin-bottom: 15px; /* Increased from 10px */
-}
-
-.social-button {
-    display: inline-block;
-    background: white;
-    color: #e52e71;
-    padding: 10px 20px; /* Increased from 8px 15px */
-    border-radius: 30px;
-    text-decoration: none;
-    font-weight: bold;
-    font-size: 1.1rem; /* Increased from default */
-    transition: all 0.3s ease;
-    box-shadow: 0 5px 15px rgba(0, 0, 0, 0.2);
-}
-
-.social-button:hover {
-    transform: translateY(-3px);
-    box-shadow: 0 7px 20px rgba(0, 0, 0, 0.3);
-}
-
-.social-button:active {
-    transform: scale(0.98);
-}
-
-.social-button i {
-    margin-right: 5px;
-}
-
-/* Footer styles - now fixed at bottom */
-footer {
-    background: linear-gradient(45deg, #ff8a00, #e52e71);
-    padding: 10px 0;
-    box-shadow: 0 -5px 25px rgba(229, 46, 113, 0.3);
-    position: fixed;
-    bottom: 0;
-    left: 0;
-    width: 100%;
-    z-index: 1000;
-}
-
-.footer-content {
-    max-width: 1400px;
-    margin: 0 auto;
-    display: flex;
-    flex-wrap: wrap;
-    justify-content: space-around;
-    align-items: center;
     text-align: center;
 }
 
-.footer-section {
-    padding: 0 15px;
+.version {
+    margin-top: 5px;
+    font-size: 10px;
 }
 
-footer p {
-    color: white;
-    margin: 3px 0;
-    font-size: 0.9rem;
-    text-shadow: 1px 1px 2px rgba(0, 0, 0, 0.2);
+/* Hide scrollbars */
+::-webkit-scrollbar {
+    display: none;
 }
 
-footer a {
-    color: white;
-    text-decoration: none;
-    font-weight: 600;
-    padding: 0 3px;
-    position: relative;
-    transition: all 0.3s ease;
-}
-
-footer a::after {
-    content: '';
-    position: absolute;
-    width: 0;
-    height: 2px;
-    bottom: -2px;
-    left: 0;
-    background-color: white;
-    transition: width 0.3s ease;
-}
-
-footer a:hover::after {
-    width: 100%;
+/* Remove all controls that might exist in HTML */
+.prev-btn, .next-btn, .zoom-in-btn, .zoom-out-btn, 
+.zoom-reset-btn, .fullscreen-btn, .play-pause-btn, 
+.share-btn, .controls, .indicator-container {
+    display: none !important;
 }
 
 /* Animations */
 @keyframes fadeIn {
-    0% { opacity: 0; transform: translateY(-30px); }
-    100% { opacity: 1; transform: translateY(0); }
+    from { opacity: 0; }
+    to { opacity: 1; }
 }
 
-@keyframes pulse {
-    0% { transform: scale(1); }
-    50% { transform: scale(1.03); }
-    100% { transform: scale(1); }
+@keyframes slideUp {
+    from { transform: translateY(20px); opacity: 0; }
+    to { transform: translateY(0); opacity: 1; }
 }
 
-@keyframes float {
-    0% { transform: translateY(0px); }
-    50% { transform: translateY(-8px); }
-    100% { transform: translateY(0px); }
+.location-marker, .copyright-text {
+    animation: slideUp 0.5s ease-out forwards;
 }
 
-/* Apply animations */
-.slide.active img {
-    animation: pulse 8s ease-in-out infinite;
-}
-
-/* Loading animation */
-.loading-overlay {
-    position: fixed;
-    top: 0;
-    left: 0;
-    width: 100%;
-    height: 100%;
-    background: linear-gradient(135deg, #0f1746, #120f2d, #000);
-    display: flex;
-    justify-content: center;
-    align-items: center;
-    z-index: 9999;
-    transition: opacity 1s ease, visibility 1s ease;
-}
-
-.loading-spinner {
-    width: 60px;
-    height: 60px;
-    border: 5px solid rgba(255, 255, 255, 0.1);
-    border-top: 5px solid #e52e71;
-    border-radius: 50%;
-    animation: spin 1s linear infinite;
-}
-
-@keyframes spin {
-    0% { transform: rotate(0deg); }
-    100% { transform: rotate(360deg); }
-}
-
-/* Custom scrollbar */
-::-webkit-scrollbar {
-    width: 8px;
-}
-
-::-webkit-scrollbar-track {
-    background: rgba(255, 255, 255, 0.05);
-    border-radius: 10px;
-}
-
-::-webkit-scrollbar-thumb {
-    background: linear-gradient(45deg, #ff8a00, #e52e71);
-    border-radius: 10px;
-}
-
-::-webkit-scrollbar-thumb:hover {
-    background: linear-gradient(45deg, #e52e71, #ff8a00);
-}
-
-/* Button and interactive element effects */
-button, .nav-arrow, .progress-dot, .social-button {
-    transition: all 0.3s cubic-bezier(0.175, 0.885, 0.32, 1.275);
-}
-
-button:hover, .nav-arrow:hover, .progress-dot:hover, .social-button:hover {
-    transform: scale(1.05);
-}
-
-button:active, .nav-arrow:active, .progress-dot:active, .social-button:active {
-    transform: scale(0.98);
-}
-
-/* Image effects */
-.slide img {
-    filter: brightness(0.95);
-    transition: all 0.5s ease;
-}
-
-.slide.active img:hover {
-    filter: brightness(1.1);
-}
-
-/* Page load animation */
-.content-wrapper, footer {
-    animation: fadeIn 1s ease-out;
-}
-
-/* Error style for failed images */
-.slide.image-error {
-    background-color: rgba(255, 0, 0, 0.1);
-}
-
-.slide.image-error img {
-    opacity: 0.7;
-    border: 1px dashed rgba(255, 255, 255, 0.3);
-}
-
-/* Fix for Instagram section on different aspect ratios */
-@supports (aspect-ratio: 16/9) {
-    .instagram-section {
-        position: fixed;
-        bottom: 90px;
-        right: 20px;
-        z-index: 900;
-        max-height: calc(100vh - 200px);
-        overflow: auto;
-    }
-}
-
-/* Responsive design - original media queries */
-@media (max-width: 1200px) {
-    .slideshow-container {
-        max-height: 75vh;
-    }
-}
-
+/* Media queries for responsive design */
 @media (max-width: 768px) {
-    .weather-bar {
-        padding: 8px 10px;
-        flex-direction: column;
-        align-items: flex-start;
-        gap: 10px;
+    .location-marker, .copyright-text {
+        font-size: 14px;
+        padding: 4px 10px;
     }
     
-    .forecast-container {
-        width: 100%;
-        justify-content: space-between;
-        gap: 5px;
+    .location-marker {
+        bottom: 20px;
+        left: 20px;
     }
     
-    .forecast-day {
-        padding: 3px 8px;
-        font-size: 0.9rem;
+    .copyright-text {
+        bottom: 20px;
+        right: 20px;
     }
     
-    .slideshow-container {
-        aspect-ratio: 16/10; /* Slightly taller on medium screens */
-        max-height: 70vh;
-        padding: 10px;
-    }
-    
-    .slide-caption {
-        top: 10px;
-        right: 10px;
-        max-width: 80%;
-        padding: 10px;
-    }
-    
-    .location-badge {
-        bottom: 10px;
-        left: 10px;
-        padding: 5px 10px;
-        font-size: 0.9rem;
-    }
-    
-    .nav-arrow {
-        width: 40px;
-        height: 40px;
-    }
-    
-    .progress-container {
-        bottom: 10px;
-    }
-    
-    .instagram-section {
-        width: 180px;
-        padding: 15px;
-        bottom: 80px;
+    .slide-counter {
+        top: 15px;
         right: 15px;
+        font-size: 14px;
     }
     
-    .instagram-section h2 {
-        font-size: 1.2rem;
-    }
-    
-    .instagram-section img {
-        width: 100px;
-        height: 100px;
-    }
-    
-    .footer-content {
-        padding: 5px;
-    }
-    
-    .footer-section {
-        padding: 0 10px;
+    .loading-progress {
+        width: 250px;
     }
 }
 
 @media (max-width: 480px) {
-    body {
-        padding: 10px;
-        padding-bottom: 70px;
+    .location-marker, .copyright-text {
+        font-size: 12px;
+        padding: 3px 8px;
     }
     
-    .current-weather {
-        gap: 10px;
+    .location-marker {
+        bottom: 15px;
+        left: 15px;
     }
     
-    .forecast-container {
-        display: none; /* Hide forecast on very small screens */
+    .copyright-text {
+        bottom: 15px;
+        right: 15px;
     }
     
-    .slideshow-container {
-        aspect-ratio: 4/3; /* Change aspect ratio for mobile */
-        max-height: 60vh;
-    }
-    
-    .slide-caption {
-        max-width: 90%;
-        font-size: 0.9rem;
-        padding: 8px;
-    }
-    
-    .slide-caption p {
-        font-size: 0.9rem;
-    }
-    
-    .slide-caption small {
-        font-size: 0.7rem;
-    }
-    
-    .nav-arrow {
-        width: 35px;
-        height: 35px;
-    }
-    
-    .prev-arrow {
-        left: 10px;
-    }
-    
-    .next-arrow {
+    .slide-counter {
+        top: 10px;
         right: 10px;
+        font-size: 12px;
     }
     
-    .progress-dot {
-        width: 8px;
-        height: 8px;
-    }
-    
-    .instagram-section {
+    .loading-progress {
         width: 200px;
-        padding: 15px;
-        bottom: 70px;
-        right: 10px;
     }
     
-    .instagram-section h2 {
-        font-size: 1.3rem;
-    }
-    
-    .instagram-section img {
-        width: 120px;
-        height: 120px;
-    }
-    
-    .instagram-section p {
-        font-size: 1rem;
-    }
-    
-    .social-button {
-        padding: 8px 15px;
-        font-size: 0.9rem;
-    }
-    
-    footer {
-        padding: 5px 0;
-    }
-    
-    footer p {
-        font-size: 0.8rem;
+    .loading-logo {
+        max-width: 150px;
     }
 }
 
-/* New media queries for large screens and TVs */
-@media (min-width: 1920px) {
-    .slideshow-container {
-        max-width: 80vw;
-        height: 80vh;
-    }
-    
-    .weather-bar {
-        padding: 15px 40px;
-    }
-    
-    .current-weather span, .forecast-day {
-        font-size: 1.2rem;
-    }
-    
-    .location-badge {
-        font-size: 1.3rem;
-        padding: 12px 22px;
-    }
-    
-    .slide-caption {
-        max-width: 400px;
-    }
-    
-    .slide-caption p {
-        font-size: 1.2rem;
-    }
-    
-    .instagram-section {
-        width: 320px;
-        padding: 30px;
-        bottom: 120px;
-    }
-    
-    .instagram-section h2 {
-        font-size: 1.8rem;
-    }
-    
-    .instagram-section img {
-        width: 220px;
-        height: 220px;
-    }
-    
-    .social-button {
-        font-size: 1.3rem;
-        padding: 12px 24px;
-    }
+/* Prevent text selection */
+.gallery-container, .location-marker, .copyright-text, .slide-counter {
+    user-select: none;
+    -webkit-user-select: none;
+    -moz-user-select: none;
+    -ms-user-select: none;
 }
 
-/* For TV screens and ultra-wide displays */
-@media (min-width: 2560px) {
-    body {
-        padding: 40px;
-        padding-bottom: 120px;
-    }
-    
-    .slideshow-container {
-        max-width: 70vw;
-        height: 75vh;
-        padding: 25px;
-    }
-    
-    .weather-bar {
-        padding: 20px 60px;
-    }
-    
-    .current-weather span, .forecast-day {
-        font-size: 1.5rem;
-    }
-    
-    .nav-arrow {
-        width: 70px;
-        height: 70px;
-    }
-    
-    .nav-arrow i {
-        font-size: 2rem;
-    }
-    
-    .progress-dot {
-        width: 15px;
-        height: 15px;
-    }
-    
-    .instagram-section {
-        width: 380px;
-        padding: 35px;
-        bottom: 150px;
-        right: 40px;
-    }
-    
-    .instagram-section h2 {
-        font-size: 2.2rem;
-    }
-    
-    .instagram-section img {
-        width: 260px;
-        height: 260px;
-    }
-    
-    .instagram-section p {
-        font-size: 1.6rem;
-    }
-    
-    .social-button {
-        font-size: 1.6rem;
-        padding: 15px 30px;
-    }
-    
-    footer {
-        padding: 15px 0;
-    }
-    
-    footer p {
-        font-size: 1.2rem;
-    }
+/* Add a subtle vignette effect */
+.slide::after {
+    content: '';
+    position: absolute;
+    top: 0;
+    left: 0;
+    width: 100%;
+    height: 100%;
+    background: radial-gradient(circle, transparent 60%, rgba(0, 0, 0, 0.4) 100%);
+    pointer-events: none;
 }
 
-/* Fix for portrait images on large screens */
-@media (min-width: 1600px) {
-    .slide.portrait img {
-        max-height: 90%;
-        max-width: 60%;
-    }
+/* Improve visual appearance of progress bar */
+.progress-bar {
+    box-shadow: 0 0 8px rgba(255, 255, 255, 0.5);
 }
 
-/* Special TV mode for smart TVs */
-@media (min-width: 3840px) {
-    .slideshow-container {
-        max-width: 65vw;
-        height: 70vh;
-    }
-    
-    .nav-arrow {
-        width: 100px;
-        height: 100px;
-    }
-    
-    .nav-arrow i {
-        font-size: 3rem;
-    }
-    
-    .progress-dot {
-        width: 20px;
-        height: 20px;
-        margin: 0 5px;
-    }
-    
-    .current-weather span, .forecast-day {
-        font-size: 2rem;
-    }
-    
-    .location-badge {
-        font-size: 2rem;
-        padding: 15px 30px;
-        border-radius: 30px;
-    }
-    
-    .instagram-section {
-        width: 500px;
-        padding: 40px;
-    }
-    
-    .instagram-section h2 {
-        font-size: 3rem;
-    }
-    
-    .instagram-section img {
-        width: 360px;
-        height: 360px;
-        padding: 15px;
-    }
-    
-    .instagram-section p {
-        font-size: 2.4rem;
-    }
-    
-    .social-button {
-        font-size: 2.2rem;
-        padding: 20px 40px;
-        border-radius: 40px;
-    }
-    
-    footer p {
-        font-size: 1.6rem;
-    }
-    
-    .slide-caption {
-        max-width: 600px;
-        padding: 25px;
-        border-radius: 20px;
-    }
-    
-    .slide-caption p {
-        font-size: 1.8rem;
-    }
-    
-    .slide-caption small {
-        font-size: 1.2rem;
-    }
-    
-    .photo-credit {
-        font-size: 1.2rem;
-    }
-}
-
-/* Special handling for ultra-wide screens to maintain proper aspect ratio */
-@media (min-width: 2560px) and (max-aspect-ratio: 21/9) {
-    .slideshow-container {
-        max-width: 75vw;
-        max-height: 70vh;
-    }
-}
-
-/* Browser-specific fixes */
-.is-ie-edge .slideshow-container {
-    transform: none !important;
-}
-
-.is-safari .slideshow-container {
-    will-change: auto;
-}
-
-.is-tv .nav-arrow,
-.is-tv .progress-dot,
-.is-tv .social-button {
-    transition: transform 0.4s ease-out;
-}
-
-.is-tv .slideshow-container {
-    box-shadow: 0 30px 60px rgba(0, 0, 0, 0.7);
-}
-
-/* Fixes for image loading and error states */
-img[src=""] {
-    opacity: 0;
-}
-
-.slide img[src=""],
-.slide img:not([src]) {
-    display: none;
-}
-
-/* Better loading animation for slow networks */
-@keyframes pulse-loading {
-    0% { opacity: 0.3; }
-    50% { opacity: 0.7; }
-    100% { opacity: 0.3; }
-}
-
-.slide:not(.active) img {
-    opacity: 0;
-}
-
-.slide.loading img {
-    animation: pulse-loading 1.5s ease-in-out infinite;
-}
-
-/* Make all form factors properly handle orientation changes */
-@media (orientation: portrait) {
-    .slideshow-container {
-        height: 70vh;
-        max-width: 95vw;
-    }
-    
-    .instagram-section {
-        bottom: 100px;
-    }
-}
-
-@media (orientation: landscape) and (max-height: 600px) {
-    .slideshow-container {
-        height: 65vh;
-    }
-    
-    .weather-bar {
-        padding: 5px 15px;
-    }
-    
-    .instagram-section {
-        transform: scale(0.8);
-        transform-origin: bottom right;
-        bottom: 70px;
-    }
-}
-
-/* Print styles in case someone wants to print the page */
-@media print {
-    .slideshow-container {
-        height: auto;
-        box-shadow: none;
-    }
-    
-    .slide {
-        display: block;
-        page-break-inside: avoid;
-        opacity: 1;
-        position: relative;
-        height: auto;
-        margin-bottom: 20px;
-    }
-    
-    .instagram-section,
-    .nav-arrow,
-    .progress-container,
-    .weather-bar {
-        display: none;
-    }
-    
-    body {
-        background: white;
-        color: black;
-    }
-    
-    .location-badge {
-        color: black;
-        background: #f0f0f0;
-        opacity: 1;
-        transform: none;
-    }
-    
-    .slide-caption {
-        color: black;
-        background: #f0f0f0;
-        opacity: 1;
-        transform: none;
-    }
-}
-
-/* High contrast mode for accessibility */
-@media (prefers-contrast: high) {
-    .slideshow-container {
-        background: black;
-    }
-    
-    .location-badge,
-    .weather-bar,
-    footer {
-        background: black;
-        border: 2px solid white;
-    }
-    
-    .forecast-day {
-        background: black;
-        border: 1px solid white;
-    }
-    
-    .nav-arrow {
-        background: black;
-        border: 2px solid white;
-    }
-    
-    .progress-dot {
-        background: black;
-        border: 1px solid white;
-    }
-    
-    .progress-dot.active {
-        background: white;
-    }
-}
-
-/* Reduced motion preference for accessibility */
-@media (prefers-reduced-motion: reduce) {
-    * {
-        animation: none !important;
-        transition: none !important;
-    }
-    
-    .instagram-section {
-        animation: none !important;
-    }
-    
-    .slide.active img {
-        animation: none !important;
-    }
-}
-
-/* Fix for Firefox specific issues */
-@-moz-document url-prefix() {
-    .slideshow-container {
-        backface-visibility: initial;
-    }
-    
-    .slide img {
-        image-rendering: -webkit-optimize-contrast;
-    }
+/* Optional: Add subtle shadow to images for better contrast with any background */
+.slide img {
+    filter: drop-shadow(0 0 10px rgba(0, 0, 0, 0.2));
 }
