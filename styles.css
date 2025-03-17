@@ -6,7 +6,7 @@
 }
 
 body {
-    font-family: 'Arial', sans-serif;
+    font-family: 'Montserrat', sans-serif;
     background-color: #000;
     color: #fff;
     overflow: hidden;
@@ -21,110 +21,7 @@ body {
     background-color: #000;
 }
 
-/* Slides styling */
-.slide {
-    position: absolute;
-    top: 0;
-    left: 0;
-    width: 100%;
-    height: 100%;
-    opacity: 0;
-    transition: opacity 1.2s ease-in-out;
-    display: flex;
-    align-items: center;
-    justify-content: center;
-}
-
-.slide.active {
-    opacity: 1;
-    z-index: 1;
-}
-
-.slide img {
-    max-width: 100%;
-    max-height: 100%;
-    object-fit: contain;
-}
-
-/* Image overlay container */
-.image-overlay {
-    position: absolute;
-    bottom: 0;
-    left: 0;
-    right: 0;
-    padding: 20px;
-    z-index: 5;
-    pointer-events: none;
-}
-
-/* Location marker */
-.location-marker {
-    position: absolute;
-    bottom: 25px;
-    left: 25px;
-    display: flex;
-    align-items: center;
-    font-size: 16px;
-    padding: 6px 12px;
-    color: #ffffff;
-    background: rgba(0, 0, 0, 0.6);
-    border-radius: 30px;
-    box-shadow: 0 2px 10px rgba(0, 0, 0, 0.2);
-    backdrop-filter: blur(5px);
-    transition: all 0.3s ease;
-}
-
-.location-marker i {
-    margin-right: 8px;
-}
-
-/* Copyright text */
-.copyright-text {
-    position: absolute;
-    bottom: 25px;
-    right: 25px;
-    font-size: 16px;
-    padding: 6px 12px;
-    color: #ffffff;
-    background: rgba(0, 0, 0, 0.6);
-    border-radius: 30px;
-    box-shadow: 0 2px 10px rgba(0, 0, 0, 0.2);
-    backdrop-filter: blur(5px);
-    transition: all 0.3s ease;
-}
-
-/* Progress bar */
-.progress-container {
-    position: absolute;
-    bottom: 0;
-    left: 0;
-    width: 100%;
-    height: 4px;
-    background: rgba(0, 0, 0, 0.5);
-    z-index: 10;
-}
-
-.progress-bar {
-    height: 100%;
-    width: 0;
-    background: #ffffff;
-    transition: width 0.1s linear;
-}
-
-/* Slide counter */
-.slide-counter {
-    position: absolute;
-    top: 20px;
-    right: 20px;
-    font-size: 16px;
-    color: #ffffff;
-    background: rgba(0, 0, 0, 0.6);
-    padding: 5px 10px;
-    border-radius: 30px;
-    z-index: 10;
-}
-
-/* Loading screen */
+/* Enhanced Loading Screen */
 #loading-screen {
     position: fixed;
     top: 0;
@@ -140,23 +37,34 @@ body {
     transition: opacity 0.8s ease;
 }
 
-.loading-logo {
-    max-width: 200px;
-    margin-bottom: 30px;
+.loading-title {
+    font-size: 32px;
+    font-weight: 600;
+    color: #ffffff;
+    margin-bottom: 10px;
+    letter-spacing: 1px;
 }
 
 .loading-collaboration {
     color: #ffffff;
-    font-size: 16px;
-    margin-bottom: 40px;
+    font-size: 18px;
+    margin-bottom: 10px;
     opacity: 0.8;
+    font-style: italic;
+}
+
+.version-display {
+    color: #ffffff;
+    font-size: 14px;
+    margin-bottom: 40px;
+    opacity: 0.6;
 }
 
 .loading-progress {
     width: 300px;
-    height: 4px;
+    height: 6px;
     background: rgba(255, 255, 255, 0.2);
-    border-radius: 2px;
+    border-radius: 3px;
     overflow: hidden;
     margin-bottom: 20px;
 }
@@ -164,43 +72,337 @@ body {
 .loading-progress-bar {
     height: 100%;
     width: 0;
-    background: #ffffff;
+    background: linear-gradient(90deg, #ffffff, #a0a0ff);
     transition: width 0.3s ease;
+    box-shadow: 0 0 10px rgba(255, 255, 255, 0.7);
 }
 
 .loading-text {
     color: #ffffff;
-    font-size: 14px;
-    opacity: 0.7;
+    font-size: 16px;
+    opacity: 0.8;
 }
 
-/* Footer styling */
+/* Enhanced slide transitions */
+.slide {
+    position: absolute;
+    top: 0;
+    left: 0;
+    width: 100%;
+    height: 100%;
+    opacity: 0;
+    transition: opacity 1.5s ease-in-out, transform 1.5s ease-in-out;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    transform: scale(1.05);
+}
+
+.slide.active {
+    opacity: 1;
+    z-index: 1;
+    transform: scale(1);
+}
+
+.slide img {
+    max-width: 100%;
+    max-height: 100%;
+    object-fit: contain;
+    filter: drop-shadow(0 0 10px rgba(0, 0, 0, 0.2));
+}
+
+/* Image overlay container */
+.image-overlay {
+    position: absolute;
+    bottom: 0;
+    left: 0;
+    right: 0;
+    padding: 20px;
+    z-index: 5;
+    pointer-events: none;
+}
+
+/* Enhanced Instagram container styling - LARGER VERSION */
+.instagram-container {
+    position: absolute;
+    bottom: 40px;
+    right: 40px;
+    display: flex;
+    align-items: center;
+    background: linear-gradient(45deg, #405DE6, #5851DB, #833AB4, #C13584, #E1306C, #FD1D1D);
+    border-radius: 20px;
+    padding: 20px;
+    box-shadow: 0 10px 30px rgba(0, 0, 0, 0.5);
+    backdrop-filter: blur(10px);
+    transition: all 0.4s cubic-bezier(0.175, 0.885, 0.32, 1.275);
+    border: 3px solid rgba(255, 255, 255, 0.4);
+    max-width: 450px;
+    animation: slideUp 0.5s ease-out forwards;
+    pointer-events: auto;
+    cursor: pointer;
+    z-index: 20;
+}
+
+.instagram-qr {
+    width: 120px;
+    height: 120px;
+    background: #fff;
+    border-radius: 12px;
+    overflow: hidden;
+    margin-right: 20px;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    box-shadow: 0 5px 15px rgba(0, 0, 0, 0.3);
+    border: 4px solid rgba(255, 255, 255, 0.9);
+}
+
+.instagram-qr img {
+    width: 100%;
+    height: 100%;
+    object-fit: contain;
+}
+
+.instagram-text {
+    color: #ffffff;
+    flex: 1;
+}
+
+.instagram-title {
+    font-weight: 700;
+    font-size: 22px;
+    margin-bottom: 5px;
+    text-transform: uppercase;
+    letter-spacing: 0.5px;
+}
+
+.instagram-handle {
+    font-weight: 600;
+    font-size: 24px;
+    margin-bottom: 10px;
+    display: flex;
+    align-items: center;
+}
+
+.instagram-handle i {
+    margin-right: 10px;
+    font-size: 28px;
+}
+
+.instagram-tagline {
+    font-size: 16px;
+    opacity: 0.95;
+    line-height: 1.4;
+    margin-bottom: 12px;
+}
+
+.instagram-support {
+    font-size: 15px;
+    font-style: italic;
+    opacity: 0.9;
+    margin-bottom: 10px;
+    font-weight: 500;
+}
+
+.instagram-cta {
+    margin-top: 12px;
+    font-size: 14px;
+    background: rgba(255, 255, 255, 0.3);
+    display: inline-block;
+    padding: 6px 15px;
+    border-radius: 20px;
+    font-weight: 600;
+    letter-spacing: 0.5px;
+    text-transform: uppercase;
+    box-shadow: 0 2px 8px rgba(0, 0, 0, 0.2);
+}
+
+/* Add a hover effect for the Instagram container */
+.instagram-container:hover {
+    transform: translateY(-8px) scale(1.03);
+    box-shadow: 0 15px 40px rgba(0, 0, 0, 0.6);
+}
+
+.instagram-container:hover .instagram-cta {
+    background: rgba(255, 255, 255, 0.4);
+}
+
+/* Media queries for responsive design */
+@media (max-width: 768px) {
+    .instagram-container {
+        bottom: 30px;
+        right: 30px;
+        max-width: 380px;
+        padding: 15px;
+    }
+    
+    .instagram-qr {
+        width: 100px;
+        height: 100px;
+        margin-right: 15px;
+    }
+    
+    .instagram-title {
+        font-size: 18px;
+    }
+    
+    .instagram-handle {
+        font-size: 20px;
+    }
+    
+    .instagram-handle i {
+        font-size: 24px;
+    }
+    
+    .instagram-tagline {
+        font-size: 14px;
+    }
+    
+    .instagram-support {
+        font-size: 13px;
+    }
+    
+    .instagram-cta {
+        font-size: 13px;
+        padding: 5px 12px;
+    }
+}
+
+@media (max-width: 480px) {
+    .instagram-container {
+        bottom: 20px;
+        right: 20px;
+        max-width: 300px;
+        padding: 12px;
+    }
+    
+    .instagram-qr {
+        width: 80px;
+        height: 80px;
+        margin-right: 12px;
+    }
+    
+    .instagram-title {
+        font-size: 16px;
+    }
+    
+    .instagram-handle {
+        font-size: 18px;
+    }
+    
+    .instagram-handle i {
+        font-size: 20px;
+    }
+    
+    .instagram-tagline {
+        font-size: 13px;
+        margin-bottom: 8px;
+    }
+    
+    .instagram-support {
+        font-size: 12px;
+        margin-bottom: 6px;
+    }
+    
+    .instagram-cta {
+        font-size: 12px;
+        padding: 4px 10px;
+        margin-top: 8px;
+    }
+}
+/* Hide the old copyright text */
+.copyright-text {
+    display: none;
+}
+
+/* Improved location marker */
+.location-marker {
+    position: absolute;
+    bottom: 30px;
+    left: 30px;
+    display: flex;
+    align-items: center;
+    font-size: 16px;
+    padding: 8px 16px;
+    color: #ffffff;
+    background: rgba(0, 0, 0, 0.7);
+    border-radius: 30px;
+    box-shadow: 0 2px 15px rgba(0, 0, 0, 0.3);
+    backdrop-filter: blur(8px);
+    transition: all 0.3s ease;
+    border: 1px solid rgba(255, 255, 255, 0.1);
+}
+
+.location-marker i {
+    margin-right: 8px;
+}
+
+/* Improved progress bar */
+.progress-container {
+    position: absolute;
+    bottom: 0;
+    left: 0;
+    width: 100%;
+    height: 5px;
+    background: rgba(0, 0, 0, 0.6);
+    z-index: 10;
+}
+
+.progress-bar {
+    height: 100%;
+    width: 0;
+    background: linear-gradient(90deg, #ffffff, #a0a0ff);
+    transition: width 0.1s linear;
+    box-shadow: 0 0 10px rgba(255, 255, 255, 0.5);
+}
+
+/* Improved slide counter */
+.slide-counter {
+    position: absolute;
+    top: 25px;
+    right: 25px;
+    font-size: 16px;
+    color: #ffffff;
+    background: rgba(0, 0, 0, 0.7);
+    padding: 8px 16px;
+    border-radius: 30px;
+    z-index: 10;
+    box-shadow: 0 2px 15px rgba(0, 0, 0, 0.3);
+    backdrop-filter: blur(8px);
+    border: 1px solid rgba(255, 255, 255, 0.1);
+}
+
+/* Enhanced footer */
 .footer {
     position: absolute;
     bottom: 20px;
     left: 50%;
     transform: translateX(-50%);
-    font-size: 12px;
-    color: rgba(255, 255, 255, 0.5);
+    font-size: 14px;
+    color: rgba(255, 255, 255, 0.6);
     z-index: 10;
     text-align: center;
+    background: rgba(0, 0, 0, 0.5);
+    padding: 8px 16px;
+    border-radius: 20px;
+    backdrop-filter: blur(5px);
 }
 
 .version {
     margin-top: 5px;
-    font-size: 10px;
+    font-size: 12px;
 }
 
-/* Hide scrollbars */
-::-webkit-scrollbar {
-    display: none;
-}
-
-/* Remove all controls that might exist in HTML */
-.prev-btn, .next-btn, .zoom-in-btn, .zoom-out-btn, 
-.zoom-reset-btn, .fullscreen-btn, .play-pause-btn, 
-.share-btn, .controls, .indicator-container {
-    display: none !important;
+/* Enhanced vignette effect */
+.slide::after {
+    content: '';
+    position: absolute;
+    top: 0;
+    left: 0;
+    width: 100%;
+    height: 100%;
+    background: radial-gradient(circle, transparent 65%, rgba(0, 0, 0, 0.6) 100%);
+    pointer-events: none;
 }
 
 /* Animations */
@@ -214,25 +416,55 @@ body {
     to { transform: translateY(0); opacity: 1; }
 }
 
-.location-marker, .copyright-text {
+.location-marker, .instagram-container {
     animation: slideUp 0.5s ease-out forwards;
+}
+
+/* Add a hover effect for the Instagram container */
+.instagram-container:hover {
+    transform: translateY(-5px);
+    box-shadow: 0 6px 20px rgba(0, 0, 0, 0.4);
 }
 
 /* Media queries for responsive design */
 @media (max-width: 768px) {
-    .location-marker, .copyright-text {
+    .loading-title {
+        font-size: 28px;
+    }
+    
+    .loading-collaboration {
+        font-size: 16px;
+    }
+    
+    .version-display {
+        font-size: 12px;
+        margin-bottom: 30px;
+    }
+    
+    .instagram-container {
+        bottom: 20px;
+        right: 20px;
+        max-width: 250px;
+    }
+    
+    .instagram-qr {
+        width: 50px;
+        height: 50px;
+    }
+    
+    .instagram-handle {
         font-size: 14px;
-        padding: 4px 10px;
+    }
+    
+    .instagram-tagline {
+        font-size: 11px;
     }
     
     .location-marker {
+        font-size: 14px;
+        padding: 6px 12px;
         bottom: 20px;
         left: 20px;
-    }
-    
-    .copyright-text {
-        bottom: 20px;
-        right: 20px;
     }
     
     .slide-counter {
@@ -247,19 +479,45 @@ body {
 }
 
 @media (max-width: 480px) {
-    .location-marker, .copyright-text {
+    .loading-title {
+        font-size: 24px;
+    }
+    
+    .loading-collaboration {
+        font-size: 14px;
+    }
+    
+    .version-display {
         font-size: 12px;
-        padding: 3px 8px;
+        margin-bottom: 30px;
+    }
+    
+    .instagram-container {
+        bottom: 15px;
+        right: 15px;
+        max-width: 200px;
+        padding: 8px;
+    }
+    
+    .instagram-qr {
+        width: 40px;
+        height: 40px;
+        margin-right: 8px;
+    }
+    
+    .instagram-handle {
+        font-size: 12px;
+    }
+    
+    .instagram-tagline {
+        font-size: 10px;
     }
     
     .location-marker {
+        font-size: 12px;
+        padding: 3px 8px;
         bottom: 15px;
         left: 15px;
-    }
-    
-    .copyright-text {
-        bottom: 15px;
-        right: 15px;
     }
     
     .slide-counter {
@@ -271,38 +529,30 @@ body {
     .loading-progress {
         width: 200px;
     }
-    
-    .loading-logo {
-        max-width: 150px;
-    }
 }
 
 /* Prevent text selection */
-.gallery-container, .location-marker, .copyright-text, .slide-counter {
+.gallery-container, .location-marker, .slide-counter {
     user-select: none;
     -webkit-user-select: none;
     -moz-user-select: none;
     -ms-user-select: none;
 }
 
-/* Add a subtle vignette effect */
-.slide::after {
-    content: '';
-    position: absolute;
-    top: 0;
-    left: 0;
-    width: 100%;
-    height: 100%;
-    background: radial-gradient(circle, transparent 60%, rgba(0, 0, 0, 0.4) 100%);
-    pointer-events: none;
+/* Hide scrollbars */
+::-webkit-scrollbar {
+    display: none;
 }
 
-/* Improve visual appearance of progress bar */
-.progress-bar {
-    box-shadow: 0 0 8px rgba(255, 255, 255, 0.5);
+/* Remove all controls that might exist in HTML */
+.prev-btn, .next-btn, .zoom-in-btn, .zoom-out-btn, 
+.zoom-reset-btn, .fullscreen-btn, .play-pause-btn, 
+.share-btn, .controls, .indicator-container {
+    display: none !important;
 }
 
-/* Optional: Add subtle shadow to images for better contrast with any background */
-.slide img {
-    filter: drop-shadow(0 0 10px rgba(0, 0, 0, 0.2));
+/* Error handling for images */
+.image-error {
+    border: 1px solid rgba(255, 0, 0, 0.3);
+    background-color: rgba(0, 0, 0, 0.5);
 }
